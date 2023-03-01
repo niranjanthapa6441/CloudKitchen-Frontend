@@ -1,5 +1,3 @@
-import 'package:cloud_kitchen/Response/restaurant_menu.dart';
-
 class FoodResponse {
   late String _code;
   late String _message;
@@ -24,10 +22,13 @@ class FoodResponse {
 
 class Data {
   late List<Foods> _foods;
+  late int _currentPage;
+  late int _totalElements;
+  late int _totalPages;
   List<Foods> get foods => _foods;
-  int? _currentPage;
-  int? _totalElements;
-  int? _totalPages;
+  int get currentPage => _currentPage;
+  int get totalElements => _totalElements;
+  int get totalPages => _totalPages;
 
   Data(
       {required foods,

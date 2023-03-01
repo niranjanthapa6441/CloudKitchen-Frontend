@@ -1,7 +1,13 @@
 class RestaurantMenuResponse {
-  String? _code;
-  String? _message;
-  Data? _data;
+  late String _code;
+  late String _message;
+  late Data _data;
+  String get code => _code;
+  
+  String get message => _message;
+
+  Data get data => _data;
+
 
   RestaurantMenuResponse({required code, required message, required data}) {
     _code = code;
@@ -29,7 +35,6 @@ class Data {
   int get totalElements => _totalElements;
   int get totalPages => _totalPages;
 
-
   Data(
       {required menus,
       required categories,
@@ -46,7 +51,7 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     if (json['menus'] != null) {
       json['menus'].forEach((v) {
-        _menus.add(new Menus.fromJson(v));
+        _menus.add(Menus.fromJson(v));
       });
     }
     _categories = json['categories'].cast<String>();

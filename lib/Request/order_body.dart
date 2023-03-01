@@ -22,16 +22,14 @@ class OrderRequest {
       required this.paymentMethod,
       required this.paymentStatus});
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['username'] = this.username;
-    if (this.foods != null) {
-      data['restaurants'] = this.foods.map((v) => v.toJson()).toList();
-    }
-    data['totalItems'] = this.totalItems;
-    data['totalPrice'] = this.totalPrice;
-    data['paymentPartner'] = this.paymentPartner;
-    data['paymentMethod'] = this.paymentMethod;
-    data['paymentStatus'] = this.paymentStatus;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['username'] = username;
+    data['foods'] = foods.map((v) => v.toJson()).toList();
+    data['totalItems'] = totalItems;
+    data['totalPrice'] = totalPrice;
+    data['paymentPartner'] = paymentPartner;
+    data['paymentMethod'] = paymentMethod;
+    data['paymentStatus'] = paymentStatus;
     return data;
   }
 }
@@ -44,9 +42,9 @@ class OrderFoodRequest {
   OrderFoodRequest({required this.menuFoodId, required this.quantity});
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['menuFoodId'] = this.menuFoodId;
-    data['quantity'] = this.quantity;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['menuFoodId'] = menuFoodId;
+    data['quantity'] = quantity;
     return data;
   }
 }

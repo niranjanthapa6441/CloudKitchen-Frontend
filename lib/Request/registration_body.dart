@@ -19,15 +19,15 @@ class SignUpBody {
       required this.dateOfBirth});
       
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['middleName'] = this.middleName;
-    data['email'] = this.email;
-    data['username'] = this.username;
-    data['phoneNumber'] = this.phoneNumber;
-    data['password'] = this.password;
-    data['dateOfBirth'] = this.dateOfBirth;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['middleName'] = middleName;
+    data['email'] = email;
+    data['username'] = username;
+    data['phoneNumber'] = phoneNumber;
+    data['password'] = password;
+    data['dateOfBirth'] = dateOfBirth;
     return data;
   }
 }

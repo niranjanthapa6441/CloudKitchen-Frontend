@@ -105,7 +105,7 @@ class OrderFoods {
   late int _price;
 
   String get name => _name;
-  int get quantity => quantity;
+  int get quantity => _quantity;
   int get unitPrice => _unitPrice;
   int get price => _price;
 

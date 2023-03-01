@@ -8,7 +8,7 @@ class APIClient extends GetConnect implements GetxService {
   Map<String, String> get mainHeaders => _mainHeaders;
   APIClient({required this.appBaseUrl}) {
     baseUrl = appBaseUrl;
-    timeout = Duration(seconds: 30);
+    timeout = const Duration(seconds: 30);
     token = "";
     _mainHeaders = {
       "content-type": "application/json; charset-UTF_8",

@@ -41,6 +41,7 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['payments'] != null) {
+       _payments = <Payments>[];
       json['payments'].forEach((v) {
         _payments.add(Payments.fromJson(v));
       });

@@ -1,46 +1,45 @@
 class AppConstant {
   static const String appName = "Cloud Kitchen";
   static const String baseURL = "http://100.64.218.31:8080/cloudKitchen/";
-  static const String apiVersion = "/api/v1";
+  static String apiVersion = "/api/v1";
 
-  static const String userId = "";
-  static const String orderId = "";
-  static const String menuFoodId = "";
-  static const String category = "";
-  static const String meal = "";
-  static const double rating = 0.0;
-  static const String restaurantName = "";
-  static const int page = 0;
-  static const int size = 5;
-  static const String period = "";
-  static const String startDate = "";
-  static const String endDate = "";
-  static const String paymentMethod = "";
-  static const String paymentPartner = "";
-  static const String sortBy = "";
-  static const String foodName = "";
-  static const String restaurantId = "";
-  static const String username = "";
-  static const String latitude = "";
-  static const String longitude = "";
-  static const String userURI = "/user";
-  static const String searchFoodsURI =
-      "/menu?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
-  static const String restaurantURI =
-      "/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
-  static const String restaurantMenuURI =
-      "menu/restaurant/$restaurantId?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&";
-  static const String paymentsURI =
-      "/payment?page=$page&startDate=$startDate&endDate=$endDate&username=$username&period=$period&paymentPartner=$paymentPartner&paymentMethod=$paymentMethod&size=$size";
-  static const String ordersURI =
-      "order/customer/$userId?size=$size&page=$page&period=$period&startDate=$startDate&endDate=$endDate&sortBy=$sortBy";
-  static const String categoryURI = "/category";
-  static const String mealURI = "/meal";
-  static const String paypalPaymentURI = "/payment/paypal";
-  static const String loginURI = "/user/login";
-  static const String registrationURI = "/user/registration";
-  static const String stripePaymentURI = "/payment/stripe";
-  static const String profileURI = "/user/$userId";
-  static const String saveOrderURI = "/order";
-  
+  static String userId = "";
+  static String orderId = "";
+  static String menuFoodId = "";
+  static String category = "";
+  static String meal = "";
+  static double rating = 0.0;
+  static String restaurantName = "";
+  static int page = 0;
+  static int size = 5;
+  static String period = "";
+  static String startDate = "";
+  static String endDate = "";
+  static String paymentMethod = "";
+  static String paymentPartner = "";
+  static String sortBy = "";
+  static String foodName = "";
+  static String restaurantId = "";
+  static String username = "";
+  static String latitude = "";
+  static String longitude = "";
+  static String userURI = "/user";
+  static String searchFoodsURI =
+      "$apiVersion/menu?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
+  static String restaurantURI =
+      "$apiVersion/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
+  static String restaurantMenuURI =
+      "$apiVersion/menu/restaurant/$restaurantId?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&";
+  static String paymentsURI =
+      "$apiVersion/payment?page=$page&startDate=$startDate&endDate=$endDate&username=$username&period=$period&paymentPartner=$paymentPartner&paymentMethod=$paymentMethod&size=$size";
+  static String ordersURI =
+      "$apiVersion/order/customer/$userId?size=$size&page=$page&period=$period&startDate=$startDate&endDate=$endDate&sortBy=$sortBy";
+  static String categoryURI = "$apiVersion/category";
+  static String mealURI = "$apiVersion/meal";
+  static String paypalPaymentURI = "$apiVersion/payment/paypal";
+  static String loginURI = "$apiVersion/user/login";
+  static String registrationURI = "$apiVersion/user/registration";
+  static String stripePaymentURI = "$apiVersion/payment/stripe";
+  static String profileURI = "$apiVersion/user/$userId";
+  static String saveOrderURI = "$apiVersion/order";
 }

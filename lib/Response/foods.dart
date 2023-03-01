@@ -42,6 +42,7 @@ class Data {
   }
   Data.fromJson(Map<String, dynamic> json) {
     if (json['menuFoods'] != null) {
+      _foods = <Foods>[];
       json['menuFoods'].forEach((v) {
         _foods.add(Foods.fromJson(v));
       });

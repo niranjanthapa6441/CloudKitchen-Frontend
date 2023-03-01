@@ -21,16 +21,19 @@ class AppConstant {
   static const String foodName = "";
   static const String restaurantId = "";
   static const String username = "";
-
+  static const String latitude = "";
+  static const String longitude = "";
   static const String userURI = "/user";
   static const String searchFoodsURI =
       "/menu?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
-  static const String restaurantURI = "/restaurant";
+  static const String restaurantURI =
+      "/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
   static const String restaurantMenuURI =
       "menu/restaurant/$restaurantId?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&";
   static const String paymentsURI =
       "/payment?page=$page&startDate=$startDate&endDate=$endDate&username=$username&period=$period&paymentPartner=$paymentPartner&paymentMethod=$paymentMethod&size=$size";
-  static const String ordersURI = "/customer/$userId?page=$page&size=$size";
+  static const String ordersURI =
+      "order/customer/$userId?size=$size&page=$page&period=$period&startDate=$startDate&endDate=$endDate&sortBy=$sortBy";
   static const String categoryURI = "/category";
   static const String mealURI = "/meal";
   static const String paypalPaymentURI = "/payment/paypal";
@@ -38,4 +41,6 @@ class AppConstant {
   static const String registrationURI = "/user/registration";
   static const String stripePaymentURI = "/payment/stripe";
   static const String profileURI = "/user/$userId";
+  static const String saveOrderURI = "/order";
+  
 }

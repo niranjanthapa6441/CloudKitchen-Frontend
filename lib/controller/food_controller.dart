@@ -26,20 +26,15 @@ class FoodController extends GetxController {
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  Future<void> getCustomerBookingDetails() async {
+  Future<void> getFoodDetails() async {
     Response response = await foodRepo.getFoods();
     if (response.statusCode == 200) {
       _isLoaded = true;
-      _foods
-          .addAll(FoodResponse.fromJson(response.body).data.foods);
+      _foods.addAll(FoodResponse.fromJson(response.body).data.foods);
       _currentPage = FoodResponse.fromJson(response.body).data.currentPage;
       _totalElements = FoodResponse.fromJson(response.body).data.totalElements;
       _totalPages = FoodResponse.fromJson(response.body).data.totalPages;
       update();
-    } else {
-      Response response = await foodRepo.getFoods();
-      ErrorResponse error= ErrorResponse.fromJson(response.body);
-      showCustomSnackBar(error.message,title:"Foods");
     }
   }
 }

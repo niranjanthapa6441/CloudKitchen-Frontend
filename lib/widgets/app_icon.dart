@@ -1,3 +1,4 @@
+import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
 import 'package:flutter/material.dart';
 
 class AppIcon extends StatelessWidget {
@@ -10,7 +11,7 @@ class AppIcon extends StatelessWidget {
       required this.icon,
       this.backgroundColor = const Color(0xFFfcf4e4),
       this.iconColor = const Color(0xFF756d54),
-      this.size = 40})
+      this.size = 0})
       : super(key: key);
 
   @override
@@ -19,13 +20,14 @@ class AppIcon extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(size / 2),
+        borderRadius:
+            BorderRadius.circular(size == 0 ? Dimensions.font10 * 2 : size / 2),
         color: backgroundColor,
       ),
       child: Center(
         child: Icon(
           icon,
-          size: size / 1.5,
+          size: size == 0 ? Dimensions.font10 * 4 / 1.5 : size / 1.5,
           color: iconColor,
         ),
       ),

@@ -41,9 +41,9 @@ class Data {
     _totalPages = totalPages;
   }
   Data.fromJson(Map<String, dynamic> json) {
-    if (json['menuFoods'] != null) {
+    if (json['foods'] != null) {
       _foods = <Foods>[];
-      json['menuFoods'].forEach((v) {
+      json['foods'].forEach((v) {
         _foods.add(Foods.fromJson(v));
       });
     }
@@ -58,12 +58,11 @@ class Foods {
   String? name;
   String? description;
   double? rating;
-  String? deliveryTime;
   String? restaurantName;
   String? restaurantAddress;
   String? category;
-  int? price;
-  int? discountPrice;
+  double? price;
+  double? discountPrice;
   String? imagePath;
   String? meal;
 
@@ -72,7 +71,6 @@ class Foods {
       this.name,
       this.description,
       this.rating,
-      this.deliveryTime,
       this.restaurantName,
       this.restaurantAddress,
       this.category,
@@ -82,11 +80,11 @@ class Foods {
       this.meal});
 
   Foods.fromJson(Map<String, dynamic> json) {
+    print("I'm here");
     menuFoodId = json['menuFoodId'];
     name = json['name'];
     description = json['description'];
     rating = json['rating'];
-    deliveryTime = json['deliveryTime'];
     restaurantName = json['restaurantName'];
     restaurantAddress = json['restaurantAddress'];
     category = json['category'];

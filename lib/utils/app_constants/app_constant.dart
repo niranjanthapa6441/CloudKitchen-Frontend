@@ -1,6 +1,6 @@
 class AppConstant {
   static const String appName = "Cloud Kitchen";
-  static const String baseURL = "http://100.64.218.31:8080/cloudKitchen/";
+  static const String baseURL = "http://127.0.0.1:8080/cloudKitchen";
   static String apiVersion = "/api/v1";
 
   static String userId = "";
@@ -24,8 +24,7 @@ class AppConstant {
   static String latitude = "";
   static String longitude = "";
   static String userURI = "/user";
-  static String searchFoodsURI =
-      "$apiVersion/menu?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
+  static String searchFoodsURI = "$apiVersion/menu";
   static String restaurantURI =
       "$apiVersion/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
   static String restaurantMenuURI =

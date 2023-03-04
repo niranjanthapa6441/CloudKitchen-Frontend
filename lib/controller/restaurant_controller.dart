@@ -20,13 +20,13 @@ class RestaurantController extends GetxController {
   int get currentPage => _currentPage;
   int get totalPages => _totalPages;
   int get totalElements => _totalElements;
-  void setCustomerBookingDetail() {
+  void setRestaurants() {
     _restaurants = [];
   }
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  Future<void> getCustomerBookingDetails() async {
+  Future<void> getRestaurantDetails() async {
     Response response = await restaurantRepo.getRestaurants();
     if (response.statusCode == 200) {
       _isLoaded = true;

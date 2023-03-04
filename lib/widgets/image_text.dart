@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../utils/Color/colors.dart';
 import '../utils/dimensions/dimension.dart';
 import 'big_text.dart';
+
 class ImageAndTextWidget extends StatelessWidget {
   final String imageURl;
   final String text;
@@ -18,7 +19,7 @@ class ImageAndTextWidget extends StatelessWidget {
           height: Dimensions.height10 * 12,
           margin: EdgeInsets.only(),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(Dimensions.radius20),
             color: Colors.white38,
             image: DecorationImage(
               image: AssetImage(imageURl),

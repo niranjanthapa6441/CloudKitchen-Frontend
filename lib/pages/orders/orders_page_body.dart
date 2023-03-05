@@ -34,7 +34,6 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<OrderController>().getOrders();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -81,19 +80,25 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
           print(
               "orders length" + orders.customerOrderDetails.length.toString());
           return GestureDetector(
-            child: Container(
-              height: Dimensions.height10 * 120,
-              child: ListView.builder(
-                  controller: scrollController,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: orders.customerOrderDetails.length,
-                  itemBuilder: (context, index) {
-                    return _buildCustomerBookingDetailItemPage(
-                        index, orders.customerOrderDetails[index]);
-                  }),
-            ),
+            child: orders.isLoaded
+                ? Container(
+                    height: Dimensions.height10 * 111,
+                    child: ListView.builder(
+                        controller: scrollController,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: orders.customerOrderDetails.length,
+                        itemBuilder: (context, index) {
+                          return _buildCustomerBookingDetailItemPage(
+                              index, orders.customerOrderDetails[index]);
+                        }),
+                  )
+                : const Center(
+                    child: CircularProgressIndicator.adaptive(
+                      backgroundColor: Color.fromARGB(255, 3, 3, 3),
+                    ),
+                  ),
           );
         }),
       ],

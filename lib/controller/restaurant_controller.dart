@@ -7,7 +7,6 @@ import '../base/show_custom_snack_bar.dart';
 import '../repository/restaurant_repo.dart';
 
 class RestaurantController extends GetxController {
-  
   final RestaurantRepo restaurantRepo;
 
   RestaurantController({required this.restaurantRepo});
@@ -31,7 +30,6 @@ class RestaurantController extends GetxController {
     Response response = await restaurantRepo.getRestaurants();
     print("Response" + response.statusCode.toString());
     if (response.statusCode == 200) {
-      _isLoaded = true;
       _restaurants
           .addAll(RestaurantResponse.fromJson(response.body).data.restaurants);
       _currentPage =
@@ -39,6 +37,8 @@ class RestaurantController extends GetxController {
       _totalElements =
           RestaurantResponse.fromJson(response.body).data.totalElements;
       _totalPages = RestaurantResponse.fromJson(response.body).data.totalPages;
+      _isLoaded = true;
+
       update();
     } else {
       Response response = await restaurantRepo.getRestaurants();

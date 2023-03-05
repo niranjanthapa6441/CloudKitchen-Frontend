@@ -29,17 +29,17 @@ class OrderController extends GetxController {
   Future<void> getOrders() async {
     Response response = await orderRepository.getCustomerOrderDetails();
     if (response.statusCode == 200) {
-      _isLoaded = true;
       _customerOrderDetails
           .addAll(OrderResponse.fromJson(response.body).data.orders);
       _currentPage = OrderResponse.fromJson(response.body).data.currentPage;
       _totalElements = OrderResponse.fromJson(response.body).data.totalElements;
       _totalPages = OrderResponse.fromJson(response.body).data.totalPages;
+      _isLoaded = true;
       update();
     } else {
       Response response = await orderRepository.getCustomerOrderDetails();
-      ErrorResponse error= ErrorResponse.fromJson(response.body);
-      showCustomSnackBar(error.message,title:"orders");
+      ErrorResponse error = ErrorResponse.fromJson(response.body);
+      showCustomSnackBar(error.message, title: "orders");
     }
   }
 

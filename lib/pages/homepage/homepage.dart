@@ -1,16 +1,12 @@
-import 'package:cloud_kitchen/Response/foods.dart';
-import 'package:cloud_kitchen/controller/food_controller.dart';
 import 'package:cloud_kitchen/pages/homepage/homepage_body.dart';
-import 'package:cloud_kitchen/utils/app_constants/app_constant.dart';
-import 'package:cloud_kitchen/utils/color/colors.dart';
+import 'package:cloud_kitchen/pages/orders/orders_page.dart';
+import 'package:cloud_kitchen/pages/payment_details/payment_details_page.dart';
 import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
-import 'package:cloud_kitchen/widgets/big_text.dart';
 import 'package:cloud_kitchen/widgets/icon_and_text_widget.dart';
-import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../controller/restaurant_controller.dart';
+import '../profile/profile_page.dart';
+import '../search_food/search_food_page.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -76,6 +72,7 @@ class _HomepageState extends State<Homepage> {
           )),
         ],
       ),
+      
     );
   }
 }

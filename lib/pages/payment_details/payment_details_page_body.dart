@@ -34,7 +34,6 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<PaymentController>().getCustomerPaymentDetails();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -78,22 +77,26 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
           ),
         ),
         GetBuilder<PaymentController>(builder: (payments) {
-          print("payments length" +
-              payments.customerPaymentDetails.length.toString());
           return GestureDetector(
-            child: Container(
-              height: Dimensions.height10 * 100,
-              child: ListView.builder(
-                  controller: scrollController,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: payments.customerPaymentDetails.length,
-                  itemBuilder: (context, index) {
-                    return _buildCustomerBookingDetailItemPage(
-                        index, payments.customerPaymentDetails[index]);
-                  }),
-            ),
+            child: payments.isLoaded
+                ? Container(
+                    height: Dimensions.height10 * 97,
+                    child: ListView.builder(
+                        controller: scrollController,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: payments.customerPaymentDetails.length,
+                        itemBuilder: (context, index) {
+                          return _buildCustomerBookingDetailItemPage(
+                              index, payments.customerPaymentDetails[index]);
+                        }),
+                  )
+                : const Center(
+                    child: CircularProgressIndicator.adaptive(
+                      backgroundColor: Color.fromARGB(255, 3, 3, 3),
+                    ),
+                  ),
           );
         }),
       ],

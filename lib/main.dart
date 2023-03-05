@@ -1,12 +1,13 @@
-import 'package:cloud_kitchen/pages/homepage/homepage.dart';
-import 'package:cloud_kitchen/pages/orders/orders_page_body.dart';
-import 'package:cloud_kitchen/pages/payment_details/payment_details_page.dart';
+import 'package:cloud_kitchen/pages/homepage/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_kitchen/utils/helper/dependencies.dart' as dep;
 import 'package:cloud_kitchen/route_helper/route_helper.dart';
 
-import 'pages/orders/orders_page.dart';
+import 'controller/food_controller.dart';
+import 'controller/order_controller.dart';
+import 'controller/payment_controller.dart';
+import 'controller/restaurant_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,10 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    Get.find<FoodController>().getFoodDetails();
+    Get.find<RestaurantController>().getRestaurantDetails();
+    Get.find<OrderController>().getOrders();
+    Get.find<PaymentController>().getCustomerPaymentDetails();
     return GetMaterialApp(
       title: 'Cloud Kitchen',
       theme: ThemeData(
@@ -27,7 +32,7 @@ class MyApp extends StatelessWidget {
           )),
       debugShowCheckedModeBanner: false,
       getPages: RouteHelper.routes,
-      home: PaymentDetailsPage(),
+      home: Navigation(),
     );
   }
 }

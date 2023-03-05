@@ -12,16 +12,17 @@ class _PaymentDetailsPageState extends State<PaymentDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Payment Details'),
-        backgroundColor: Color.fromARGB(255, 223, 123, 80),
-      ),
       body: Column(
         children: [
+          AppBar(
+            automaticallyImplyLeading: false,
+            title: const Text('Payment Details'),
+            backgroundColor: Color.fromARGB(255, 223, 123, 80),
+          ),
           Container(
               child: Expanded(
-                  child: SingleChildScrollView(child: PaymentDetailsPageBody()))),
+                  child:
+                      SingleChildScrollView(child: PaymentDetailsPageBody()))),
         ],
       ),
     );

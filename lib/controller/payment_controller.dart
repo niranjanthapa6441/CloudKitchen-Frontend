@@ -1,4 +1,3 @@
-
 import 'package:cloud_kitchen/Response/payments.dart';
 import 'package:cloud_kitchen/repository/payment_repository.dart';
 import 'package:get/get_connect.dart';
@@ -30,17 +29,19 @@ class PaymentController extends GetxController {
   Future<void> getCustomerPaymentDetails() async {
     Response response = await paymentRepo.getCustomerPayment();
     if (response.statusCode == 200) {
-      _isLoaded = true;
       _customerPaymentDetails
           .addAll(PaymentResponse.fromJson(response.body).data.payments);
       _currentPage = PaymentResponse.fromJson(response.body).data.currentPage;
-      _totalElements = PaymentResponse.fromJson(response.body).data.totalElements;
+      _totalElements =
+          PaymentResponse.fromJson(response.body).data.totalElements;
       _totalPages = PaymentResponse.fromJson(response.body).data.totalPages;
+      _isLoaded = true;
+
       update();
     } else {
       Response response = await paymentRepo.getCustomerPayment();
-      ErrorResponse error= ErrorResponse.fromJson(response.body);
-      showCustomSnackBar(error.message,title:"Payments");
+      ErrorResponse error = ErrorResponse.fromJson(response.body);
+      showCustomSnackBar(error.message, title: "Payments");
     }
   }
 }

@@ -29,11 +29,11 @@ class FoodController extends GetxController {
   Future<void> getFoodDetails() async {
     Response response = await foodRepo.getFoods();
     if (response.statusCode == 200) {
-      _isLoaded = true;
       _foods.addAll(FoodResponse.fromJson(response.body).data.foods);
       _currentPage = FoodResponse.fromJson(response.body).data.currentPage;
       _totalElements = FoodResponse.fromJson(response.body).data.totalElements;
       _totalPages = FoodResponse.fromJson(response.body).data.totalPages;
+      _isLoaded = true;
       update();
     }
   }

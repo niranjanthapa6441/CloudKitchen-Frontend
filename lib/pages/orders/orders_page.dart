@@ -14,16 +14,15 @@ class _OrdersState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      body: Column(
+        children:[
+          AppBar(
         automaticallyImplyLeading: false,
         title: const Text('Order Details'),
         backgroundColor: Color.fromARGB(255, 223, 123, 80),
-      ),
-      body: Column(
-        children: [
-          Container(
-              child: Expanded(
-                  child: SingleChildScrollView(child: OrdersPageBody()))),
+        ),
+          const Expanded(
+              child: SingleChildScrollView(child: OrdersPageBody())),
         ],
       ),
     );

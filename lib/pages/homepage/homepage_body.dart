@@ -2,15 +2,10 @@ import 'package:cloud_kitchen/Response/restaurants.dart';
 import 'package:cloud_kitchen/controller/restaurant_controller.dart';
 import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../../Response/foods.dart';
-import '../../Response/orders.dart';
 import '../../controller/food_controller.dart';
-import '../../controller/order_controller.dart';
 import '../../utils/Color/colors.dart';
 import '../../utils/app_constants/app_constant.dart';
 import '../../utils/dimensions/dimension.dart';
@@ -26,29 +21,37 @@ class HomePageBody extends StatefulWidget {
 
 class _HomePageBodyState extends State<HomePageBody> {
   PageController pageController = PageController(viewportFraction: 0.9);
+  ScrollController scrollController = ScrollController();
   var _currentPageValue = 0.0;
+  var _currentPosition = 0.0;
+
   double _scaleFactor = 0.8;
   double _height = Dimensions.pageViewContainer;
+
   @override
   void initState() {
     super.initState();
-      pageController.addListener(() {
-        setState(() {
-          _currentPageValue = pageController.page!;
-        });
+    pageController.addListener(() {
+      setState(() {
+        _currentPageValue = pageController.page!;
       });
+    });
+    scrollController.addListener(() {
+      setState(() {
+        _currentPosition = scrollController.position as double;
+      });
+    });
   }
 
   @override
   void dispose() {
     pageController.dispose();
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Get.find<FoodController>().getFoodDetails();
-    AppConstant.page = 1;
-    Get.find<RestaurantController>().getRestaurantDetails();
     return Column(
       children: [
         Container(
@@ -61,15 +64,19 @@ class _HomePageBodyState extends State<HomePageBody> {
         ),
         GetBuilder<FoodController>(builder: (foods) {
           return GestureDetector(
-            child: Container(
-              height: Dimensions.height10 * 35,
-              child: PageView.builder(
-                  controller: pageController,
-                  itemCount: foods.foods.length,
-                  itemBuilder: (context, index) {
-                    return _buildPageItem(index, foods.foods[index]);
-                  }),
-            ),
+            child: foods.isLoaded
+                ? Container(
+                    height: Dimensions.height10 * 35,
+                    child: PageView.builder(
+                        controller: pageController,
+                        itemCount: foods.foods.length,
+                        itemBuilder: (context, index) {
+                          return _buildPageItem(index, foods.foods[index]);
+                        }),
+                  )
+                : CircularProgressIndicator.adaptive(
+                    backgroundColor: Color.fromARGB(255, 3, 3, 3),
+                  ),
           );
         }),
         Container(
@@ -83,9 +90,10 @@ class _HomePageBodyState extends State<HomePageBody> {
         ),
         GetBuilder<RestaurantController>(builder: (restaurants) {
           return GestureDetector(
-            child: Container(
+            child: restaurants.isLoaded?Container(
               height: Dimensions.height10 * 70,
               child: ListView.builder(
+                  controller: scrollController,
                   shrinkWrap: true,
                   padding: EdgeInsets.zero,
                   physics: NeverScrollableScrollPhysics(),
@@ -94,7 +102,9 @@ class _HomePageBodyState extends State<HomePageBody> {
                     return _buildPopularRestaurant(
                         index, restaurants.restaurants[index]);
                   }),
-            ),
+            ):CircularProgressIndicator.adaptive(
+                    backgroundColor: Color.fromARGB(255, 3, 3, 3),
+                  ),
           );
         }),
       ],

@@ -53,14 +53,14 @@ class Data {
 }
 
 class Payments {
-  late int _paidAmount;
+  late double _paidAmount;
   late String _paymentDate;
   late String _paymentTime;
   late String _paymentMethod;
   late String _paymentPartner;
   late String _status;
 
-  int get paidAmount => _paidAmount;
+  double get paidAmount => _paidAmount;
   String get paymentDate => _paymentDate;
   String get paymentTime => _paymentTime;
   String get paymentMethod => _paymentMethod;

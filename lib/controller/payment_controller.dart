@@ -27,7 +27,7 @@ class PaymentController extends GetxController {
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  Future<void> getCustomerBookingDetails() async {
+  Future<void> getCustomerPaymentDetails() async {
     Response response = await paymentRepo.getCustomerPayment();
     if (response.statusCode == 200) {
       _isLoaded = true;

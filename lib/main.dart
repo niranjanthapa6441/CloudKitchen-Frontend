@@ -1,5 +1,6 @@
 import 'package:cloud_kitchen/pages/homepage/homepage.dart';
 import 'package:cloud_kitchen/pages/orders/orders_page_body.dart';
+import 'package:cloud_kitchen/pages/payment_details/payment_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_kitchen/utils/helper/dependencies.dart' as dep;
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           )),
       debugShowCheckedModeBanner: false,
       getPages: RouteHelper.routes,
-      home: OrdersPage(),
+      home: PaymentDetailsPage(),
     );
   }
 }

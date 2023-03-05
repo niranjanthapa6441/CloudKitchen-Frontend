@@ -9,6 +9,7 @@ class OrderRepository extends GetxService {
   OrderRepository({required this.apiClient});
 
   Future<Response> getCustomerOrderDetails() async {
+        print("uri" + apiClient.appBaseUrl + AppConstant.ordersURI);
     return await apiClient.getData(
         AppConstant.ordersURI,
         apiClient.mainHeaders);

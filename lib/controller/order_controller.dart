@@ -26,7 +26,7 @@ class OrderController extends GetxController {
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  Future<void> getCustomerBookingDetails() async {
+  Future<void> getOrders() async {
     Response response = await orderRepository.getCustomerOrderDetails();
     if (response.statusCode == 200) {
       _isLoaded = true;

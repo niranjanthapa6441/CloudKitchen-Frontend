@@ -57,7 +57,7 @@ class Data {
 
 class Orders {
   String? orderId;
-  int? totalPrice;
+  double? totalPrice;
   int? totalItems;
   String? orderDate;
   String? orderTime;
@@ -92,8 +92,8 @@ class Orders {
 class OrderFoods {
   String? name;
   int? quantity;
-  int? unitPrice;
-  int? price;
+  double? unitPrice;
+  double? price;
 
   OrderFoods({this.name, this.quantity, this.unitPrice, this.price});
 

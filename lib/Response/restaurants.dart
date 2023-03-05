@@ -4,12 +4,10 @@ class RestaurantResponse {
   late Data _data;
 
   String get code => _code;
-
   String get message => _message;
-
   Data get data => _data;
 
-  RestaurantResponse({required code, required message, required data}) {
+  RestaurantResponse({code, message, data}) {
     _code = code;
     _message = message;
     _data = data;
@@ -30,14 +28,12 @@ class Data {
 
   List<Restaurants> get restaurants => _restaurants;
   int get currentPage => _currentPage;
+
   int get totalElements => _totalElements;
+
   int get totalPages => _totalPages;
 
-  Data(
-      {required restaurants,
-      required currentPage,
-      required totalElements,
-      required totalPages}) {
+  Data({restaurants, currentPage, totalElements, totalPages}) {
     _restaurants = restaurants;
     _currentPage = currentPage;
     _totalElements = totalElements;
@@ -48,7 +44,7 @@ class Data {
     if (json['restaurants'] != null) {
       _restaurants = <Restaurants>[];
       json['restaurants'].forEach((v) {
-        _restaurants.add(Restaurants.fromJson(v));
+        restaurants.add(new Restaurants.fromJson(v));
       });
     }
     _currentPage = json['currentPage'];
@@ -58,59 +54,50 @@ class Data {
 }
 
 class Restaurants {
-  late String _id;
-  late String _name;
-  late String _countryCode;
-  late String _phoneNumber;
-  late String _telephoneNumber;
-  late String _email;
-  late String _address;
-  late String _status;
-
-  String get id => _id;
-
-  String get name => _name;
-
-  String get countryCode => _countryCode;
-
-  String get phoneNumber => _phoneNumber;
-
-  String get telephoneNumber => _telephoneNumber;
-
-  String get email => _email;
-
-  String get address => _address;
-
-  String get status => _status;
+  String? id;
+  String? name;
+  String? countryCode;
+  String? phoneNumber;
+  String? telephoneNumber;
+  String? email;
+  String? address;
+  String? status;
+  String? imagePath;
 
   Restaurants(
-      {required id,
-      required name,
-      required countryCode,
-      required phoneNumber,
-      required telephoneNumber,
-      required email,
-      required address,
-      required status}) {
-    _id = id;
-    _name = name;
-    _countryCode = countryCode;
-    _phoneNumber = phoneNumber;
-    _telephoneNumber = telephoneNumber;
-    _email = email;
-    _address = address;
-    _status = status;
-  }
+      {this.id,
+      this.name,
+      this.countryCode,
+      this.phoneNumber,
+      this.telephoneNumber,
+      this.email,
+      this.address,
+      this.status,
+      this.imagePath});
 
   Restaurants.fromJson(Map<String, dynamic> json) {
-    _id = json['id'];
-    _name = json['name'];
-    _countryCode = json['countryCode'];
-    _phoneNumber = json['phoneNumber'];
-    _telephoneNumber = json['telephoneNumber'];
-    _email = json['email'];
-    _address = json['address'];
-    _status = json['status'];
-    print("I'm here to be hones");
+    id = json['id'];
+    name = json['name'];
+    countryCode = json['countryCode'];
+    phoneNumber = json['phoneNumber'];
+    telephoneNumber = json['telephoneNumber'];
+    email = json['email'];
+    address = json['address'];
+    status = json['status'];
+    imagePath = json['imagePath'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['countryCode'] = this.countryCode;
+    data['phoneNumber'] = this.phoneNumber;
+    data['telephoneNumber'] = this.telephoneNumber;
+    data['email'] = this.email;
+    data['address'] = this.address;
+    data['status'] = this.status;
+    data['imagePath'] = this.imagePath;
+    return data;
   }
 }

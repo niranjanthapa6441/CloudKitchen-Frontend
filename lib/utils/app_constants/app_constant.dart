@@ -3,14 +3,14 @@ class AppConstant {
   static const String baseURL = "http://127.0.0.1:8080/cloudKitchen";
   static String apiVersion = "/api/v1";
 
-  static String userId = "";
+  static String userId = "1";
   static String orderId = "";
   static String menuFoodId = "";
   static String category = "";
   static String meal = "";
   static double rating = 0.0;
   static String restaurantName = "";
-  static int page = 0;
+  static int page = 1;
   static int size = 5;
   static String period = "";
   static String startDate = "";
@@ -24,7 +24,8 @@ class AppConstant {
   static String latitude = "";
   static String longitude = "";
   static String userURI = "/user";
-  static String searchFoodsURI = "$apiVersion/menu";
+  static String searchFoodsURI =
+      "$apiVersion/menu?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
   static String restaurantURI =
       "$apiVersion/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
   static String restaurantMenuURI =

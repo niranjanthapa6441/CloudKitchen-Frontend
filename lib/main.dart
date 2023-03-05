@@ -1,8 +1,11 @@
 import 'package:cloud_kitchen/pages/homepage/homepage.dart';
+import 'package:cloud_kitchen/pages/orders/orders_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_kitchen/utils/helper/dependencies.dart' as dep;
 import 'package:cloud_kitchen/route_helper/route_helper.dart';
+
+import 'pages/orders/orders_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
           )),
       debugShowCheckedModeBanner: false,
       getPages: RouteHelper.routes,
-      home: Homepage(),
+      home: OrdersPage(),
     );
   }
 }

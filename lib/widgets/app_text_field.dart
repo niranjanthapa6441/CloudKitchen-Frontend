@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
 import 'package:flutter/material.dart';
 

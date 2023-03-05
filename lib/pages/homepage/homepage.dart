@@ -10,6 +10,8 @@ import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/restaurant_controller.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -25,7 +27,6 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<FoodController>().getFoodDetails();
     return Scaffold(
       body: Column(
         children: [

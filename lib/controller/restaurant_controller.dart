@@ -7,6 +7,7 @@ import '../base/show_custom_snack_bar.dart';
 import '../repository/restaurant_repo.dart';
 
 class RestaurantController extends GetxController {
+  
   final RestaurantRepo restaurantRepo;
 
   RestaurantController({required this.restaurantRepo});
@@ -28,18 +29,21 @@ class RestaurantController extends GetxController {
   bool get isLoaded => _isLoaded;
   Future<void> getRestaurantDetails() async {
     Response response = await restaurantRepo.getRestaurants();
+    print("Response" + response.statusCode.toString());
     if (response.statusCode == 200) {
       _isLoaded = true;
       _restaurants
           .addAll(RestaurantResponse.fromJson(response.body).data.restaurants);
-      _currentPage = RestaurantResponse.fromJson(response.body).data.currentPage;
-      _totalElements = RestaurantResponse.fromJson(response.body).data.totalElements;
+      _currentPage =
+          RestaurantResponse.fromJson(response.body).data.currentPage;
+      _totalElements =
+          RestaurantResponse.fromJson(response.body).data.totalElements;
       _totalPages = RestaurantResponse.fromJson(response.body).data.totalPages;
       update();
     } else {
       Response response = await restaurantRepo.getRestaurants();
-      ErrorResponse error= ErrorResponse.fromJson(response.body);
-      showCustomSnackBar(error.message,title:"Restaurants");
+      ErrorResponse error = ErrorResponse.fromJson(response.body);
+      showCustomSnackBar(error.message, title: "Restaurants");
     }
   }
 }

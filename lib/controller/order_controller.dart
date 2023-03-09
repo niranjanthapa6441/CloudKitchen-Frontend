@@ -6,6 +6,8 @@ import 'package:cloud_kitchen/repository/order_repository.dart';
 import 'package:get/get.dart';
 import 'package:cloud_kitchen/base/show_custom_snack_bar.dart';
 
+import '../utils/app_constants/app_constant.dart';
+
 class OrderController extends GetxController {
   final OrderRepository orderRepository;
 
@@ -26,7 +28,7 @@ class OrderController extends GetxController {
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  Future<void> getOrders() async {
+  Future<void> get() async {
     Response response = await orderRepository.getCustomerOrderDetails();
     if (response.statusCode == 200) {
       _customerOrderDetails
@@ -43,7 +45,7 @@ class OrderController extends GetxController {
     }
   }
 
-  Future<ResponseModel> saveBookingDetails(OrderRequest request) async {
+  Future<ResponseModel> save(OrderRequest request) async {
     Response response = await orderRepository.orderFoods(request);
     late ResponseModel responseModel;
     if (response.statusCode == 200) {
@@ -55,8 +57,23 @@ class OrderController extends GetxController {
     return responseModel;
   }
 
+  Future<void> loadMore() async {
+    if (_currentPage < _totalPages) {
+      AppConstant.page += 1;
+      AppConstant.ordersURi();
+      get();
+    }
+  }
+
+  @override
   void onClose() {
-    _customerOrderDetails.clear();
+    clear();
     super.onClose();
+  }
+
+  void clear() {
+    _customerOrderDetails.clear();
+    AppConstant.page = 1;
+    AppConstant.searchFoodsURi();
   }
 }

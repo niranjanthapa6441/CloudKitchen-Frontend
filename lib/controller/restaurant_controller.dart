@@ -26,9 +26,8 @@ class RestaurantController extends GetxController {
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  Future<void> getRestaurantDetails() async {
+  Future<void> get() async {
     Response response = await restaurantRepo.getRestaurants();
-    print("Response" + response.statusCode.toString());
     if (response.statusCode == 200) {
       _restaurants
           .addAll(RestaurantResponse.fromJson(response.body).data.restaurants);
@@ -46,7 +45,7 @@ class RestaurantController extends GetxController {
       showCustomSnackBar(error.message, title: "Restaurants");
     }
   }
-
+  @override
   void onClose() {
     _restaurants.clear();
     super.onClose();

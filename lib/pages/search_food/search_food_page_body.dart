@@ -30,13 +30,15 @@ class _SearchFoodPageBodyState extends State<SearchFoodPageBody> {
   @override
   void dispose() {
     _scrollController.dispose();
+          Get.find<FoodController>().onClose();
+
     super.dispose();
   }
 
   void _onScroll() {
     if (_scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent) {
-      Get.find<FoodController>().loadMoreFoods();
+      Get.find<FoodController>().loadMore();
     }
   }
 
@@ -50,7 +52,7 @@ class _SearchFoodPageBodyState extends State<SearchFoodPageBody> {
             return GestureDetector(
               child: foods.isLoaded
                   ? Container(
-                      height: Dimensions.height10 * 62,
+                      height: Dimensions.height10 * 100,
                       padding: EdgeInsets.only(bottom: Dimensions.height20),
                       child: ListView.builder(
                           controller: _scrollController,

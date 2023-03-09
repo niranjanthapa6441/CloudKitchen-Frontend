@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
     Get.find<RestaurantController>().onClose();
     Get.find<OrderController>().onClose();
     Get.find<PaymentController>().onClose();
-    Get.find<FoodController>().getFoodDetails();
-    Get.find<RestaurantController>().getRestaurantDetails();
-    Get.find<OrderController>().getOrders();
-    Get.find<PaymentController>().getCustomerPaymentDetails();
+    Get.find<FoodController>().get();
+    Get.find<RestaurantController>().get();
+    Get.find<OrderController>().get();
+    Get.find<PaymentController>().get();
     return GetMaterialApp(
       title: 'Cloud Kitchen',
       theme: ThemeData(

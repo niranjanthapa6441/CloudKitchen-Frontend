@@ -366,7 +366,7 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
     }
     AppConstant.restaurantName = restaurantDropDownValue;
     Get.find<FoodController>().onClose();
-    Get.find<FoodController>().getFoodDetails();
+    Get.find<FoodController>().get();
     isSearching = false;
   }
 
@@ -380,7 +380,7 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
     AppConstant.sortBy = '';
     AppConstant.restaurantName = '';
     Get.find<FoodController>().onClose();
-    Get.find<FoodController>().getFoodDetails();
+    Get.find<FoodController>().get();
   }
 
 }

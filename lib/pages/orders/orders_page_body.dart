@@ -7,6 +7,7 @@ import 'package:cloud_kitchen/widgets/big_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../widgets/small_text.dart';
 
@@ -18,18 +19,27 @@ class OrdersPageBody extends StatefulWidget {
 }
 
 class _OrdersPageBodyState extends State<OrdersPageBody> {
-  ScrollController scrollController = ScrollController();
-  var _currentPageValue = 0.0;
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
-    scrollController.dispose();
+    _scrollController.dispose();
     super.dispose();
+    Get.find<OrderController>().onClose();
+    Get.find<OrderController>().get();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      Get.find<OrderController>().loadMore();
+    }
   }
 
   @override
@@ -80,23 +90,31 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
           return GestureDetector(
             child: orders.isLoaded
                 ? Container(
-                    height: Dimensions.height10 * 111,
+                    height: Dimensions.height10 * 62,
+                    padding: EdgeInsets.only(bottom: Dimensions.height20),
                     child: ListView.builder(
-                        controller: scrollController,
-                        shrinkWrap: true,
+                        controller: _scrollController,
                         padding: EdgeInsets.zero,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: orders.customerOrderDetails.length,
+                        physics: AlwaysScrollableScrollPhysics(),
+                        itemCount: orders.customerOrderDetails.length + 1,
                         itemBuilder: (context, index) {
+                          print("order.totalElements" +
+                              orders.totalElements.toString());
+                          print("order.customer" +
+                              orders.customerOrderDetails.length.toString());
+
+                          if (index != orders.totalElements &&
+                              index == orders.customerOrderDetails.length) {
+                            return _buildSingleLoadingIndicator();
+                          } else if (index == orders.totalElements &&
+                              index == orders.customerOrderDetails.length) {
+                            return Container();
+                          }
                           return _buildCustomerBookingDetailItemPage(
                               index, orders.customerOrderDetails[index]);
                         }),
                   )
-                : const Center(
-                    child: CircularProgressIndicator.adaptive(
-                      backgroundColor: Color.fromARGB(255, 3, 3, 3),
-                    ),
-                  ),
+                : _buildLoadingIndicator(),
           );
         }),
       ],
@@ -281,6 +299,183 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildLoadingIndicator() {
+    return Shimmer(
+      gradient: const LinearGradient(
+        colors: [
+          Color(0xFFEBEBF4),
+          Color(0xFFF4F4F4),
+          Color(0xFFEBEBF4),
+        ],
+        stops: [
+          0.1,
+          0.3,
+          0.4,
+        ],
+        begin: Alignment(-1.0, -0.3),
+        end: Alignment(1.0, 0.3),
+        tileMode: TileMode.clamp,
+      ),
+      child: Container(
+        height: Dimensions.height10 * 62,
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+
+          itemCount: 5, // You can adjust the number of shimmering cells
+          itemBuilder: (_, __) => Container(
+            padding: EdgeInsets.only(
+                right: Dimensions.width10,
+                left: Dimensions.width10,
+                bottom: Dimensions.height20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: Dimensions.height10 * 10,
+                  width: Dimensions.width10 * 10,
+                  color: Colors.white,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 8.0,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height10,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 8.0,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height10,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: Dimensions.height10 * 2.4,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height10,
+                      ),
+                      Container(
+                        width: 40.0,
+                        height: 8.0,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        height: Dimensions.height10,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 8.0,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSingleLoadingIndicator() {
+    return Shimmer(
+      gradient: const LinearGradient(
+        colors: [
+          Color(0xFFEBEBF4),
+          Color(0xFFF4F4F4),
+          Color(0xFFEBEBF4),
+        ],
+        stops: [
+          0.1,
+          0.3,
+          0.4,
+        ],
+        begin: Alignment(-1.0, -0.3),
+        end: Alignment(1.0, 0.3),
+        tileMode: TileMode.clamp,
+      ),
+      child: Container(
+        height: Dimensions.height10 * 13,
+        child: Container(
+          padding: EdgeInsets.only(
+              right: Dimensions.width10,
+              left: Dimensions.width10,
+              bottom: Dimensions.height20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: Dimensions.height10 * 10,
+                width: Dimensions.width10 * 10,
+                color: Colors.white,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 8.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 8.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: Dimensions.height10 * 2.4,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Container(
+                      width: 40.0,
+                      height: 8.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 8.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

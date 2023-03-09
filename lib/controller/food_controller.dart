@@ -28,10 +28,8 @@ class FoodController extends GetxController {
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
-  bool _isLoadingMore = false;
-  bool get isLoadingMore => _isLoadingMore;
 
-  Future<void> getFoodDetails() async {
+  Future<void> get() async {
     Response response = await foodRepo.getFoods();
     if (response.statusCode == 200) {
       _foods.addAll(FoodResponse.fromJson(response.body).data.foods);
@@ -43,11 +41,11 @@ class FoodController extends GetxController {
     }
   }
 
-  Future<void> loadMoreFoods() async {
+  Future<void> loadMore() async {
     if (_currentPage < _totalPages) {
       AppConstant.page += 1;
       AppConstant.searchFoodsURi();
-      getFoodDetails();
+      get();
     }
   }
 

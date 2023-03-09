@@ -5,6 +5,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../Response/error_response.dart';
 import '../base/show_custom_snack_bar.dart';
+import '../utils/app_constants/app_constant.dart';
 
 class PaymentController extends GetxController {
   final PaymentRepo paymentRepo;
@@ -26,7 +27,7 @@ class PaymentController extends GetxController {
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
-  Future<void> getCustomerPaymentDetails() async {
+  Future<void> get() async {
     Response response = await paymentRepo.getCustomerPayment();
     if (response.statusCode == 200) {
       _customerPaymentDetails
@@ -43,10 +44,25 @@ class PaymentController extends GetxController {
       ErrorResponse error = ErrorResponse.fromJson(response.body);
       showCustomSnackBar(error.message, title: "Payments");
     }
-    @override
+  }
+
+  @override
   void onClose() {
-    _customerPaymentDetails.clear();
+    clear();
     super.onClose();
   }
+
+  Future<void> loadMore() async {
+    if (_currentPage < _totalPages) {
+      AppConstant.page += 1;
+      AppConstant.ordersURi();
+      get();
+    }
+  }
+
+  void clear() {
+    _customerPaymentDetails.clear();
+    AppConstant.page = 1;
+    AppConstant.searchFoodsURi();
   }
 }

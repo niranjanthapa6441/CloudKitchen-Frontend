@@ -9,7 +9,6 @@ class RestaurantRepo {
   RestaurantRepo({required this.apiClient});
 
   Future<Response> getRestaurants() async {
-    print("uri" + apiClient.appBaseUrl + AppConstant.restaurantURI);
     return await apiClient.getData(
         AppConstant.restaurantURI, apiClient.mainHeaders);
   }

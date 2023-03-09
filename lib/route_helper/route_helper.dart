@@ -1,3 +1,4 @@
+import 'package:cloud_kitchen/pages/cart/cart_page.dart';
 import 'package:cloud_kitchen/pages/food/food_page.dart';
 import 'package:cloud_kitchen/pages/order/order_page.dart';
 import 'package:cloud_kitchen/pages/orders/orders_page.dart';
@@ -54,6 +55,7 @@ class RouteHelper {
     GetPage(name: orders, page: () => const OrdersPage()),
     GetPage(name: viewProfile, page: () => const ProfilePage()),
     GetPage(name: payments, page: () => const PaymentDetailsPage()),
+    GetPage(name: cart, page: () => const CartPage()),
     GetPage(
         name: orderDetail,
         page: () {

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../Response/foods.dart';
 import '../../controller/food_controller.dart';
+import '../../route_helper/route_helper.dart';
 import '../../utils/Color/colors.dart';
 import '../../utils/app_constants/app_constant.dart';
 import '../../utils/dimensions/dimension.dart';
@@ -142,111 +143,115 @@ class _HomePageBodyState extends State<HomePageBody> {
       matrix = Matrix4.diagonal3Values(1, _currScale, 1)
         ..setTranslationRaw(0, _currTrans, 0);
     }
-    return Transform(
-      transform: matrix,
-      child: Stack(
-        children: [
-          Container(
-            height: Dimensions.height10 * 20,
-            width: Dimensions.width10 * 200,
-            margin: EdgeInsets.only(
-                top: Dimensions.height20,
-                left: Dimensions.height10,
-                right: Dimensions.height10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius30),
-              color: Color.fromARGB(255, 87, 76, 148),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(AppConstant.baseURL +
-                    AppConstant.apiVersion +
-                    foods.imagePath.toString()),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: Dimensions.height30,
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: Dimensions.height20 * 6,
-              width: Dimensions.width10 * 32,
+    return GestureDetector(
+      child: Transform(
+        transform: matrix,
+        child: Stack(
+          children: [
+            Container(
+              height: Dimensions.height10 * 20,
+              width: Dimensions.width10 * 200,
               margin: EdgeInsets.only(
+                  top: Dimensions.height20,
                   left: Dimensions.height10,
-                  right: Dimensions.height10,
-                  bottom: Dimensions.height20),
+                  right: Dimensions.height10),
               decoration: BoxDecoration(
-                border: Border.all(width: 0.01),
-                borderRadius: BorderRadius.circular(Dimensions.radius20),
-                color: Color.fromARGB(255, 255, 255, 255),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 238, 236, 236),
-                    blurRadius: Dimensions.radius5,
-                    offset: Offset(0, 5),
-                  ),
-                  BoxShadow(
-                    color: Color.fromARGB(255, 249, 248, 248),
-                    offset: Offset(-5, 0),
-                  ),
-                  BoxShadow(
-                    color: Color.fromARGB(255, 251, 250, 250),
-                    offset: Offset(5, 0),
-                  )
-                ],
+                borderRadius: BorderRadius.circular(Dimensions.radius30),
+                color: Color.fromARGB(255, 87, 76, 148),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(AppConstant.baseURL +
+                      AppConstant.apiVersion +
+                      foods.imagePath.toString()),
+                ),
               ),
-              child: Container(
-                  padding: EdgeInsets.only(
-                      top: Dimensions.height15,
-                      left: Dimensions.height15,
-                      right: Dimensions.height15),
-                  child: Column(
-                    children: [
-                      BigText(text: foods.name.toString()),
-                      SizedBox(
-                        height: Dimensions.height10,
-                      ),
-                      Container(
-                        height: Dimensions.height10 * 3,
-                        child: BigText(
-                          text: foods.restaurantName.toString(),
-                          color: Colors.black,
-                          size: Dimensions.font10 + 2,
-                        ),
-                      ),
-                      Container(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconAndTextWidget(
-                                icon: Icons.star,
-                                text: foods.rating.toString(),
-                                iconColor: AppColors.iconColor1,
-                              ),
-                              IconAndTextWidget(
-                                icon: Icons.timer,
-                                text: '15 mins',
-                                iconColor: AppColors.mainColor,
-                              ),
-                              IconAndTextWidget(
-                                icon: Icons.location_on,
-                                text: '1.5 k.m.',
-                                iconColor: AppColors.iconColor2,
-                              ),
-                            ]),
-                      )
-                    ],
-                  )),
             ),
-          ),
-        ],
+            SizedBox(
+              height: Dimensions.height30,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: Dimensions.height20 * 6,
+                width: Dimensions.width10 * 32,
+                margin: EdgeInsets.only(
+                    left: Dimensions.height10,
+                    right: Dimensions.height10,
+                    bottom: Dimensions.height20),
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.01),
+                  borderRadius: BorderRadius.circular(Dimensions.radius20),
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(255, 238, 236, 236),
+                      blurRadius: Dimensions.radius5,
+                      offset: Offset(0, 5),
+                    ),
+                    BoxShadow(
+                      color: Color.fromARGB(255, 249, 248, 248),
+                      offset: Offset(-5, 0),
+                    ),
+                    BoxShadow(
+                      color: Color.fromARGB(255, 251, 250, 250),
+                      offset: Offset(5, 0),
+                    )
+                  ],
+                ),
+                child: Container(
+                    padding: EdgeInsets.only(
+                        top: Dimensions.height15,
+                        left: Dimensions.height15,
+                        right: Dimensions.height15),
+                    child: Column(
+                      children: [
+                        BigText(text: foods.name.toString()),
+                        SizedBox(
+                          height: Dimensions.height10,
+                        ),
+                        Container(
+                          height: Dimensions.height10 * 3,
+                          child: BigText(
+                            text: foods.restaurantName.toString(),
+                            color: Colors.black,
+                            size: Dimensions.font10 + 2,
+                          ),
+                        ),
+                        Container(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                IconAndTextWidget(
+                                  icon: Icons.star,
+                                  text: foods.rating.toString(),
+                                  iconColor: AppColors.iconColor1,
+                                ),
+                                IconAndTextWidget(
+                                  icon: Icons.timer,
+                                  text: '15 mins',
+                                  iconColor: AppColors.mainColor,
+                                ),
+                                IconAndTextWidget(
+                                  icon: Icons.location_on,
+                                  text: '1.5 k.m.',
+                                  iconColor: AppColors.iconColor2,
+                                ),
+                              ]),
+                        )
+                      ],
+                    )),
+              ),
+            ),
+          ],
+        ),
       ),
+      onTap: () {
+        Get.toNamed(RouteHelper.getFoodDetail(index));
+      },
     );
   }
 
   Widget _buildPopularRestaurant(int index, Restaurants restaurant) {
-    print("homeFood"+AppConstant.foodName);
     return Container(
       margin: EdgeInsets.only(
           top: Dimensions.height5,

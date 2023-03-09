@@ -2,6 +2,10 @@ import 'package:cloud_kitchen/pages/food/food_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+
+import '../../route_helper/route_helper.dart';
+import '../../utils/dimensions/dimension.dart';
 
 class FoodPage extends StatefulWidget {
   int foodId;

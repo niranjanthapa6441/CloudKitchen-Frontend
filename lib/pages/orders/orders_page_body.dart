@@ -98,11 +98,6 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
                         physics: AlwaysScrollableScrollPhysics(),
                         itemCount: orders.customerOrderDetails.length + 1,
                         itemBuilder: (context, index) {
-                          print("order.totalElements" +
-                              orders.totalElements.toString());
-                          print("order.customer" +
-                              orders.customerOrderDetails.length.toString());
-
                           if (index != orders.totalElements &&
                               index == orders.customerOrderDetails.length) {
                             return _buildSingleLoadingIndicator();

@@ -1,4 +1,5 @@
 import 'package:cloud_kitchen/controller/auth_controller.dart';
+import 'package:cloud_kitchen/controller/cart_controller.dart';
 import 'package:cloud_kitchen/controller/food_controller.dart';
 import 'package:cloud_kitchen/controller/menu_by_restaurant_controller.dart';
 import 'package:cloud_kitchen/controller/order_controller.dart';
@@ -29,6 +30,7 @@ Future<void> init() async {
   Get.lazyPut(() => PaymentRepo(apiClient: Get.find()));
   Get.lazyPut(() => OrderRepository(apiClient: Get.find()));
   Get.lazyPut(() => RestaurantRepo(apiClient: Get.find()));
+  
 
   //controller
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
@@ -37,6 +39,7 @@ Future<void> init() async {
   Get.lazyPut(() => OrderController(orderRepository: Get.find()));
   Get.lazyPut(() => PaymentController(paymentRepo: Get.find()));
   Get.lazyPut(() => RestaurantController(restaurantRepo: Get.find()));
+  Get.lazyPut(() => CartController());
 
 
 }

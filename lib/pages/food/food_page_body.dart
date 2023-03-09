@@ -1,11 +1,12 @@
 import 'package:cloud_kitchen/Response/foods.dart';
+import 'package:cloud_kitchen/controller/cart_controller.dart';
 import 'package:cloud_kitchen/controller/food_controller.dart';
+import 'package:cloud_kitchen/model/cart.dart';
+import 'package:cloud_kitchen/route_helper/route_helper.dart';
 import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
 import 'package:cloud_kitchen/widgets/big_text.dart';
-import 'package:cloud_kitchen/widgets/expandable_text.dart';
 import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:get/get.dart';
 
 import '../../utils/Color/colors.dart';
@@ -22,6 +23,7 @@ class FoodPageBody extends StatefulWidget {
 class _FoodPageBodyState extends State<FoodPageBody> {
   int quantity = 1;
   bool _ontap = false;
+  List<CartItem> cartItems = <CartItem>[];
   @override
   Widget build(BuildContext context) {
     Foods food = Get.find<FoodController>().foods[widget.foodId];
@@ -33,14 +35,54 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               height: Dimensions.height10 * 25,
               width: Dimensions.screenWidth,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(Dimensions.radius25),
-                      bottomRight: Radius.circular(Dimensions.radius25)),
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(AppConstant.baseURL +
-                          AppConstant.apiVersion +
-                          food.imagePath.toString()))),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(Dimensions.radius25),
+                  bottomRight: Radius.circular(Dimensions.radius25),
+                ),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    AppConstant.baseURL +
+                        AppConstant.apiVersion +
+                        food.imagePath.toString(),
+                  ),
+                ),
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: IconButton(
+                      onPressed: () {
+                        Get.toNamed(RouteHelper.getCart());
+                      },
+                      icon: Icon(
+                        Icons.shopping_cart,
+                        size: Dimensions.height30,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Get.find<CartController>().hasValue
+                      ? Positioned(
+                          top: 5,
+                          right: 5,
+                          child: Text(
+                            Get.find<CartController>()
+                                .cartItems
+                                .length
+                                .toString(),
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
             ),
             Container(
               margin: EdgeInsets.only(
@@ -160,7 +202,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           GestureDetector(
                             child: Icon(
                               Icons.remove,
-                              color:  Colors.red,
+                              color: Colors.red,
                               size: Dimensions.height50,
                             ),
                             onTap: () {
@@ -188,7 +230,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    //Get.toNamed(RouteHelper.availablePaymentMethods);
+                    addToCart(food, quantity, food.price! * quantity);
+                    Get.toNamed(RouteHelper.getCart());
                   },
                   child: Container(
                     height: Dimensions.screenHeight / 14,
@@ -217,5 +260,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   String _foodPrice(double? price, int quantity) {
     double foodPrice = price! * quantity;
     return foodPrice.toString();
+  }
+
+  void addToCart(Foods food, int quantity, double price) {
+    setState(() {
+      Get.find<CartController>().add(food, quantity, price);
+      Get.find<CartController>().hasValue;
+    });
   }
 }

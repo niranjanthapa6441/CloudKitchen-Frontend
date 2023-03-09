@@ -1,4 +1,4 @@
-import 'package:cloud_kitchen/Model/response_model.dart';
+import 'package:cloud_kitchen/model/response_model.dart';
 import 'package:cloud_kitchen/Request/order_body.dart';
 import 'package:cloud_kitchen/Response/error_response.dart';
 import 'package:cloud_kitchen/Response/orders.dart';

@@ -6,6 +6,7 @@ import 'package:get/instance_manager.dart';
 
 import '../../controller/food_controller.dart';
 import '../../utils/Color/colors.dart';
+import '../../widgets/big_text.dart';
 
 class SearchFoodPage extends StatefulWidget {
   const SearchFoodPage({super.key});
@@ -39,6 +40,7 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
   bool priceSelection = false;
   bool ratingSelection = false;
   bool isSearching = false;
+  bool selection = false;
 
   List<String> restaurants = [
     'AT Burger House and Crunchy Fried Chicken',
@@ -51,306 +53,382 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          AppBar(
-            automaticallyImplyLeading: true,
-            backgroundColor: const Color.fromARGB(255, 223, 123, 80),
-            title: const Text("Search Foods"),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                top: Dimensions.height10,
-                right: Dimensions.width5,
-                left: Dimensions.width5),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(Dimensions.radius15),
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 8,
-                      spreadRadius: 6,
-                      offset: const Offset(1, 8),
-                      color: Colors.grey.withOpacity(0.2))
-                ]),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    onChanged: (value) {
-                      isSearching = true;
-                      _searchFoods();
-                    },
-                    readOnly: false,
-                    obscureText: false,
-                    controller: searchCriteria,
-                    decoration: InputDecoration(
-                      hintText: "Search For Foods or Restaurant",
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: AppColors.mainBlackColor,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius30),
-                        borderSide: BorderSide(width: 1.0, color: Colors.white),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius30),
-                        borderSide: BorderSide(width: 1.0, color: Colors.white),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius30),
+      body: Container(
+        child: Column(
+          children: [
+            AppBar(
+              automaticallyImplyLeading: true,
+              backgroundColor: const Color.fromARGB(255, 223, 123, 80),
+              title: const Text("Search Foods"),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                  top: Dimensions.height10,
+                  right: Dimensions.width5,
+                  left: Dimensions.width5),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(Dimensions.radius15),
+                  boxShadow: [
+                    BoxShadow(
+                        blurRadius: 8,
+                        spreadRadius: 6,
+                        offset: const Offset(1, 8),
+                        color: Colors.grey.withOpacity(0.2))
+                  ]),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      onChanged: (value) {
+                        isSearching = true;
+                        _searchFoods();
+                      },
+                      readOnly: false,
+                      obscureText: false,
+                      controller: searchCriteria,
+                      decoration: InputDecoration(
+                        hintText: "Search For Foods or Restaurants",
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: AppColors.mainBlackColor,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius30),
+                          borderSide:
+                              BorderSide(width: 1.0, color: Colors.white),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius30),
+                          borderSide:
+                              BorderSide(width: 1.0, color: Colors.white),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius30),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                right: Dimensions.width5, left: Dimensions.width5),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.height10),
-                  height: Dimensions.height10 * 5,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: Dimensions.width5, right: Dimensions.width5),
-                        height: Dimensions.height10 * 4,
-                        width: Dimensions.width10 * 9.25,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radius15),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 8,
-                                  spreadRadius: 6,
-                                  offset: Offset(1, 8),
-                                  color: Colors.grey.withOpacity(0.2))
-                            ]),
-                        child: Container(
+            Container(
+              margin: EdgeInsets.only(
+                  right: Dimensions.width5, left: Dimensions.width5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.height10),
+                    height: Dimensions.height10 * 5,
+                    child: Column(
+                      children: [
+                        Container(
                           margin: EdgeInsets.only(
                               left: Dimensions.width5,
                               right: Dimensions.width5),
-                          child: Center(
-                            child: DropdownButton<String>(
-                              elevation: 16,
-                              style: TextStyle(color: AppColors.mainBlackColor),
-                              underline: null,
-                              icon: null,
-                              isExpanded: true,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  categoryDropDownValue = newValue!;
-                                  categorySelection = true;
-                                });
-                                _searchFoods();
-                              },
-                              items: category.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              hint: categorySelection
-                                  ? Text(categoryDropDownValue.toString())
-                                  : const Text("Category"),
+                          height: Dimensions.height10 * 4,
+                          width: Dimensions.width10 * 9.25,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius15),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 8,
+                                    spreadRadius: 6,
+                                    offset: Offset(1, 8),
+                                    color: Colors.grey.withOpacity(0.2))
+                              ]),
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                left: Dimensions.width5,
+                                right: Dimensions.width5),
+                            child: Center(
+                              child: DropdownButton<String>(
+                                elevation: 16,
+                                style:
+                                    TextStyle(color: AppColors.mainBlackColor),
+                                underline: null,
+                                icon: null,
+                                isExpanded: true,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    categoryDropDownValue = newValue!;
+                                    categorySelection = true;
+                                  });
+                                  _searchFoods();
+                                },
+                                items: category.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: categorySelection
+                                    ? Text(categoryDropDownValue.toString())
+                                    : const Text("Category"),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.height10),
-                  height: Dimensions.height10 * 5,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: Dimensions.width5, right: Dimensions.width5),
-                        height: Dimensions.height10 * 4,
-                        width: Dimensions.width10 * 7.5,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radius15),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 8,
-                                  spreadRadius: 6,
-                                  offset: Offset(1, 8),
-                                  color: Colors.grey.withOpacity(0.2))
-                            ]),
-                        child: Container(
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.height10),
+                    height: Dimensions.height10 * 5,
+                    child: Column(
+                      children: [
+                        Container(
                           margin: EdgeInsets.only(
                               left: Dimensions.width5,
                               right: Dimensions.width5),
-                          child: Center(
-                            child: DropdownButton<String>(
-                              elevation: 16,
-                              style: TextStyle(color: AppColors.mainBlackColor),
-                              underline: null,
-                              icon: null,
-                              isExpanded: true,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  ratingDropDownValue = newValue!;
-                                  ratingSelection = true;
-                                });
-                                _searchFoods();
-                              },
-                              items: rating.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              hint: ratingSelection
-                                  ? Text(ratingDropDownValue.toString())
-                                  : Text("Rating"),
+                          height: Dimensions.height10 * 4,
+                          width: Dimensions.width10 * 7.5,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius15),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 8,
+                                    spreadRadius: 6,
+                                    offset: Offset(1, 8),
+                                    color: Colors.grey.withOpacity(0.2))
+                              ]),
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                left: Dimensions.width5,
+                                right: Dimensions.width5),
+                            child: Center(
+                              child: DropdownButton<String>(
+                                elevation: 16,
+                                style:
+                                    TextStyle(color: AppColors.mainBlackColor),
+                                underline: null,
+                                icon: null,
+                                isExpanded: true,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    ratingDropDownValue = newValue!;
+                                    ratingSelection = true;
+                                  });
+                                  _searchFoods();
+                                },
+                                items: rating.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: ratingSelection
+                                    ? Text(ratingDropDownValue.toString())
+                                    : Text("Rating"),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.height10),
-                  height: Dimensions.height10 * 5,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: Dimensions.width5, right: Dimensions.width5),
-                        height: Dimensions.height10 * 4,
-                        width: Dimensions.width10 * 7.5,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radius20),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 8,
-                                  spreadRadius: 6,
-                                  offset: Offset(1, 8),
-                                  color: Colors.grey.withOpacity(0.2))
-                            ]),
-                        child: Container(
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.height10),
+                    height: Dimensions.height10 * 5,
+                    child: Column(
+                      children: [
+                        Container(
                           margin: EdgeInsets.only(
                               left: Dimensions.width5,
                               right: Dimensions.width5),
-                          child: Center(
-                            child: DropdownButton<String>(
-                              elevation: 16,
-                              style: TextStyle(color: AppColors.mainBlackColor),
-                              underline: null,
-                              icon: null,
-                              isExpanded: true,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  priceDropDownValue = newValue!;
-                                  priceSelection = true;
-                                });
-                                _searchFoods();
-                              },
-                              items: sortBy.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              hint: priceSelection
-                                  ? Text(priceDropDownValue.toString())
-                                  : Text("Price"),
+                          height: Dimensions.height10 * 4,
+                          width: Dimensions.width10 * 7.5,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius20),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 8,
+                                    spreadRadius: 6,
+                                    offset: Offset(1, 8),
+                                    color: Colors.grey.withOpacity(0.2))
+                              ]),
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                left: Dimensions.width5,
+                                right: Dimensions.width5),
+                            child: Center(
+                              child: DropdownButton<String>(
+                                elevation: 16,
+                                style:
+                                    TextStyle(color: AppColors.mainBlackColor),
+                                underline: null,
+                                icon: null,
+                                isExpanded: true,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    priceDropDownValue = newValue!;
+                                    priceSelection = true;
+                                  });
+                                  _searchFoods();
+                                },
+                                items: sortBy.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: priceSelection
+                                    ? Text(priceDropDownValue.toString())
+                                    : Text("Price"),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: Dimensions.height10),
-                  height: Dimensions.height10 * 5,
-                  child: Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: Dimensions.width5, right: Dimensions.width5),
-                        height: Dimensions.height10 * 4,
-                        width: Dimensions.width10 * 11,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radius15),
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 8,
-                                  spreadRadius: 6,
-                                  offset: Offset(1, 8),
-                                  color: Colors.grey.withOpacity(0.2))
-                            ]),
-                        child: Container(
+                  Container(
+                    margin: EdgeInsets.only(top: Dimensions.height10),
+                    height: Dimensions.height10 * 5,
+                    child: Column(
+                      children: [
+                        Container(
                           margin: EdgeInsets.only(
                               left: Dimensions.width5,
                               right: Dimensions.width5),
-                          child: Center(
-                            child: DropdownButton<String>(
-                              elevation: 16,
-                              style: TextStyle(color: AppColors.mainBlackColor),
-                              icon: null,
-                              isExpanded: true,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  restaurantDropDownValue = newValue!;
-                                  restaurantSelection = true;
-                                });
-                                _searchFoods();
-                              },
-                              items: restaurants.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              hint: restaurantSelection
-                                  ? Text(restaurantDropDownValue.toString())
-                                  : Text("Restaurants"),
+                          height: Dimensions.height10 * 4,
+                          width: Dimensions.width10 * 11,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius15),
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 8,
+                                    spreadRadius: 6,
+                                    offset: Offset(1, 8),
+                                    color: Colors.grey.withOpacity(0.2))
+                              ]),
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                left: Dimensions.width5,
+                                right: Dimensions.width5),
+                            child: Center(
+                              child: DropdownButton<String>(
+                                elevation: 16,
+                                style:
+                                    TextStyle(color: AppColors.mainBlackColor),
+                                icon: null,
+                                isExpanded: true,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    restaurantDropDownValue = newValue!;
+                                    restaurantSelection = true;
+                                  });
+                                  _searchFoods();
+                                },
+                                items: restaurants
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: restaurantSelection
+                                    ? Text(restaurantDropDownValue.toString())
+                                    : Text("Restaurants"),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const Expanded(
-                  child: SingleChildScrollView(child: SearchFoodPageBody()))
-        ],
+            Container(
+              height: Dimensions.height10 * 6,
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selection = false;
+                        });
+                        //Get.toNamed(RouteHelper.availablePaymentMethods);
+                      },
+                      child: Container(
+                        height: Dimensions.screenHeight / 18,
+                        width: Dimensions.width10 * 15,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius30),
+                          color: selection
+                              ? Colors.black
+                              : Color.fromARGB(255, 223, 123, 80),
+                        ),
+                        child: Center(
+                          child: BigText(
+                            text: "Food",
+                            size: Dimensions.font20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        //Get.toNamed(RouteHelper.availablePaymentMethods);
+                        setState(() {
+                          selection = true;
+                        });
+                        Get.find<FoodController>().onClose();
+
+                        Get.find<FoodController>().get();
+                      },
+                      child: Container(
+                        height: Dimensions.screenHeight / 18,
+                        width: Dimensions.width10 * 15,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius30),
+                          color: selection
+                              ? Color.fromARGB(255, 223, 123, 80)
+                              : Colors.black,
+                        ),
+                        child: Center(
+                          child: BigText(
+                            text: "Restaurant",
+                            size: Dimensions.font20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+            ),
+            selection
+                ? Container()
+                : Expanded(
+                    child: SingleChildScrollView(child: SearchFoodPageBody())),
+          ],
+        ),
       ),
     );
   }
 
   void _searchFoods() {
-
     AppConstant.category = categoryDropDownValue;
 
     AppConstant.foodName = searchCriteria.text.toString();
@@ -382,5 +460,4 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
     Get.find<FoodController>().onClose();
     Get.find<FoodController>().get();
   }
-
 }

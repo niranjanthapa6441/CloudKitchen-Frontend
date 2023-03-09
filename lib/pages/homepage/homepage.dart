@@ -1,18 +1,11 @@
 import 'package:cloud_kitchen/pages/homepage/homepage_body.dart';
-import 'package:cloud_kitchen/pages/orders/orders_page.dart';
-import 'package:cloud_kitchen/pages/payment_details/payment_details_page.dart';
 import 'package:cloud_kitchen/route_helper/route_helper.dart';
 import 'package:cloud_kitchen/utils/color/colors.dart';
 import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
-import 'package:cloud_kitchen/widgets/app_text_field.dart';
 import 'package:cloud_kitchen/widgets/big_text.dart';
-import 'package:cloud_kitchen/widgets/icon_and_text_widget.dart';
 import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../profile/profile_page.dart';
-import '../search_food/search_food_page.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -51,7 +44,8 @@ class _HomepageState extends State<Homepage> {
                     ),
                     Container(
                       child: BigText(
-                        text: '2,PuranoNaikap,Kathmandu,BagmatiProvince,Nepal',
+                        text:
+                            '2, PuranoNaikap, Kathmandu, BagmatiProvince, Nepal',
                         textOverflow: TextOverflow.ellipsis,
                         size: Dimensions.font15,
                         color: Color.fromARGB(255, 137, 136, 136),
@@ -62,15 +56,15 @@ class _HomepageState extends State<Homepage> {
                   height: Dimensions.height30,
                   width: Dimensions.width300,
                 ),
-                Container(
-                  width: Dimensions.width30,
-                  height: Dimensions.height45,
-                  child: Icon(
+                IconButton(
+                  onPressed: () {
+                    Get.toNamed(RouteHelper.getCart());
+                  },
+                  icon: Icon(
                     Icons.shopping_cart,
                     size: Dimensions.height30,
-                    color: Colors.black,
                   ),
-                )
+                ),
               ],
             ),
           ),

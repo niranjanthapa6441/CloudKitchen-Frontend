@@ -2,7 +2,7 @@ import 'package:cloud_kitchen/repository/auth_repository.dart';
 import 'package:get/get_connect.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-import '../Model/response_model.dart';
+import '../model/response_model.dart';
 import '../Request/login_body.dart';
 import '../Request/registration_body.dart';
 import '../Response/error_response.dart';

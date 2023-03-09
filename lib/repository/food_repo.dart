@@ -10,7 +10,6 @@ class FoodRepo {
 
   Future<Response> getFoods() async {
     return await apiClient.getData(
-        AppConstant.searchFoodsURI,
-        apiClient.mainHeaders);
+        AppConstant.searchFoodsURi(), apiClient.mainHeaders);
   }
 }

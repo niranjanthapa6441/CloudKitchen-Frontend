@@ -23,8 +23,6 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin:
-          EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(Dimensions.radius15),
@@ -42,7 +40,7 @@ class AppTextField extends StatelessWidget {
               : Container(
                   child: widget,
                 ),
-          Expanded(
+          Flexible(
             child: TextFormField(
               readOnly: readOnly,
               obscureText: isObscure ? true : false,
@@ -52,7 +50,7 @@ class AppTextField extends StatelessWidget {
                 prefixIcon: widget == null
                     ? Icon(
                         icon,
-                        color: AppColors.purpleColor,
+                        color: AppColors.mainBlackColor,
                       )
                     : null,
                 focusedBorder: OutlineInputBorder(

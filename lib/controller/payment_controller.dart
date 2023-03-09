@@ -43,5 +43,10 @@ class PaymentController extends GetxController {
       ErrorResponse error = ErrorResponse.fromJson(response.body);
       showCustomSnackBar(error.message, title: "Payments");
     }
+    @override
+  void onClose() {
+    _customerPaymentDetails.clear();
+    super.onClose();
+  }
   }
 }

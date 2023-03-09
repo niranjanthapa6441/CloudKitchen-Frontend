@@ -44,9 +44,9 @@ class _ExpandableTextState extends State<ExpandableText> {
                   text: hiddenText
                       ? (firstHalf + "....")
                       : (firstHalf + secondHalf),
-                  size: Dimensions.font10 * 1.6,
-                  color: AppColors.paraColor,
-                  height:Dimensions.height10 * 0.17,
+                  size: Dimensions.font10 * 20,
+                  color: AppColors.mainBlackColor,
+                  height: Dimensions.height10 * 0.4,
                 ),
                 InkWell(
                   onTap: () {

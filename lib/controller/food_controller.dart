@@ -1,10 +1,10 @@
 import 'package:cloud_kitchen/repository/food_repo.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_connect.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-import '../Response/error_response.dart';
 import '../Response/foods.dart';
-import '../base/show_custom_snack_bar.dart';
+import '../utils/app_constants/app_constant.dart';
 
 class FoodController extends GetxController {
   final FoodRepo foodRepo;
@@ -20,12 +20,17 @@ class FoodController extends GetxController {
   int get currentPage => _currentPage;
   int get totalPages => _totalPages;
   int get totalElements => _totalElements;
+
   void setCustomerBookingDetail() {
     _foods = [];
   }
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
+
+  bool _isLoadingMore = false;
+  bool get isLoadingMore => _isLoadingMore;
+
   Future<void> getFoodDetails() async {
     Response response = await foodRepo.getFoods();
     if (response.statusCode == 200) {
@@ -36,5 +41,25 @@ class FoodController extends GetxController {
       _isLoaded = true;
       update();
     }
+  }
+
+  Future<void> loadMoreFoods() async {
+    if (_currentPage < _totalPages) {
+      AppConstant.page += 1;
+      AppConstant.searchFoodsURi();
+      getFoodDetails();
+    }
+  }
+
+  @override
+  void onClose() {
+    clear();
+    super.onClose();
+  }
+
+  void clear() {
+    _foods.clear();
+    AppConstant.page = 1;
+    AppConstant.searchFoodsURi();
   }
 }

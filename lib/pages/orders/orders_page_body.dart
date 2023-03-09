@@ -1,6 +1,6 @@
 import 'package:cloud_kitchen/Response/orders.dart';
 import 'package:cloud_kitchen/controller/order_controller.dart';
-import 'package:cloud_kitchen/utils/app_constants/app_constant.dart';
+import 'package:cloud_kitchen/route_helper/route_helper.dart';
 import 'package:cloud_kitchen/utils/color/colors.dart';
 import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
 import 'package:cloud_kitchen/widgets/big_text.dart';
@@ -77,8 +77,6 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
           ),
         ),
         GetBuilder<OrderController>(builder: (orders) {
-          print(
-              "orders length" + orders.customerOrderDetails.length.toString());
           return GestureDetector(
             child: orders.isLoaded
                 ? Container(
@@ -257,20 +255,24 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
                         SizedBox(
                           height: Dimensions.height20 * 0.92,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SmallText(
-                              text: "Show More",
-                              color: AppColors.mainBlackColor,
-                              size: Dimensions.font15,
-                            ),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: AppColors.mainBlackColor,
-                            ),
-                          ],
-                        ),
+                        GestureDetector(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SmallText(
+                                text: "Show More",
+                                color: AppColors.mainBlackColor,
+                                size: Dimensions.font15,
+                              ),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: AppColors.mainBlackColor,
+                              ),
+                            ],
+                          ),
+                          onTap: () =>
+                              Get.toNamed(RouteHelper.getOrderDetail(index)),
+                        )
                       ],
                     ),
                   ),

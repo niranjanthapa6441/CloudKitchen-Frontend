@@ -90,19 +90,21 @@ class _HomePageBodyState extends State<HomePageBody> {
         ),
         GetBuilder<RestaurantController>(builder: (restaurants) {
           return GestureDetector(
-            child: restaurants.isLoaded?Container(
-              height: Dimensions.height10 * 70,
-              child: ListView.builder(
-                  controller: scrollController,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: restaurants.restaurants.length,
-                  itemBuilder: (context, index) {
-                    return _buildPopularRestaurant(
-                        index, restaurants.restaurants[index]);
-                  }),
-            ):CircularProgressIndicator.adaptive(
+            child: restaurants.isLoaded
+                ? Container(
+                    height: Dimensions.height10 * 70,
+                    child: ListView.builder(
+                        controller: scrollController,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: restaurants.restaurants.length,
+                        itemBuilder: (context, index) {
+                          return _buildPopularRestaurant(
+                              index, restaurants.restaurants[index]);
+                        }),
+                  )
+                : CircularProgressIndicator.adaptive(
                     backgroundColor: Color.fromARGB(255, 3, 3, 3),
                   ),
           );
@@ -244,6 +246,7 @@ class _HomePageBodyState extends State<HomePageBody> {
   }
 
   Widget _buildPopularRestaurant(int index, Restaurants restaurant) {
+    print("homeFood"+AppConstant.foodName);
     return Container(
       margin: EdgeInsets.only(
           top: Dimensions.height5,
@@ -295,6 +298,7 @@ class _HomePageBodyState extends State<HomePageBody> {
           ),
           Expanded(
             child: Container(
+              width: Dimensions.width20 * 20,
               padding: EdgeInsets.only(
                   left: Dimensions.width10,
                   right: Dimensions.width10,
@@ -308,14 +312,13 @@ class _HomePageBodyState extends State<HomePageBody> {
                     textOverflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(
-                    height: Dimensions.height5,
+                    height: Dimensions.height10,
                   ),
                   SmallText(
                     text: restaurant.address.toString(),
                     color: Colors.black,
-                    size: Dimensions.font10 * 1.6,
-                    textOverflow: TextOverflow.fade,
-                    height: Dimensions.height10 * 0.16,
+                    size: Dimensions.font10 * 1.3,
+                    textOverflow: TextOverflow.ellipsis,
                   ),
                   SizedBox(
                     height: Dimensions.height10,
@@ -327,20 +330,38 @@ class _HomePageBodyState extends State<HomePageBody> {
                           IconAndTextWidget(
                             icon: Icons.star,
                             text: '4.0',
+                            size: Dimensions.font10 * 1.3,
                             iconColor: AppColors.iconColor1,
                           ),
                           IconAndTextWidget(
                             icon: Icons.timer,
                             text: '15 mins',
+                            size: Dimensions.font10 * 1.3,
                             iconColor: AppColors.mainColor,
                           ),
                           IconAndTextWidget(
                             icon: Icons.location_on,
                             text: '1.5 k.ms',
+                            size: Dimensions.font10 * 1.3,
                             iconColor: AppColors.iconColor2,
                           ),
                         ]),
-                  )
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SmallText(
+                        text: "View Menu",
+                        color: AppColors.mainBlackColor,
+                        size: Dimensions.font10 * 1.4,
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: AppColors.mainBlackColor,
+                        size: Dimensions.height10 * 1.6,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

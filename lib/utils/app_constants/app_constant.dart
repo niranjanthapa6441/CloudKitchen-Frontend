@@ -24,8 +24,7 @@ class AppConstant {
   static String latitude = "";
   static String longitude = "";
   static String userURI = "/user";
-  static String searchFoodsURI =
-      "$apiVersion/menu?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
+  static String searchFoodsURI = "";
   static String restaurantURI =
       "$apiVersion/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
   static String restaurantMenuURI =
@@ -42,4 +41,11 @@ class AppConstant {
   static String stripePaymentURI = "$apiVersion/payment/stripe";
   static String profileURI = "$apiVersion/user/$userId";
   static String saveOrderURI = "$apiVersion/order";
+
+  static String searchFoodsURi() {
+    searchFoodsURI =
+        "$apiVersion/menu?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
+    ;
+    return searchFoodsURI;
+  }
 }

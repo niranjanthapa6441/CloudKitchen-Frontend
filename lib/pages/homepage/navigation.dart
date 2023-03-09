@@ -17,7 +17,6 @@ class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
   List pages = [
     const Homepage(),
-    const SearchFoodsPage(),
     const OrdersPage(),
     const PaymentDetailsPage(),
     const ProfilePage(),
@@ -40,13 +39,6 @@ class _NavigationState extends State<Navigation> {
               size: Dimensions.height30,
             ),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-              size: Dimensions.height30,
-            ),
-            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(

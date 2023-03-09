@@ -182,7 +182,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                         SmallText(
                           text: "Paid Via:",
                           color: AppColors.mainBlackColor,
-                          size: 18,
+                          size: Dimensions.font10 * 1.6,
                         ),
                         SizedBox(
                           height: Dimensions.height15,
@@ -190,7 +190,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                         SmallText(
                           text: "Method:",
                           color: AppColors.mainBlackColor,
-                          size: 18,
+                          size: Dimensions.font10 * 1.6,
                         ),
                         SizedBox(
                           height: Dimensions.height15,
@@ -198,7 +198,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                         SmallText(
                           text: "Paid Amount:",
                           color: AppColors.mainBlackColor,
-                          size: 18,
+                          size: Dimensions.font10 * 1.6,
                         ),
                         SizedBox(
                           height: Dimensions.height20 * 0.92,
@@ -206,7 +206,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                         SmallText(
                           text: "Status:",
                           color: AppColors.mainBlackColor,
-                          size: 18,
+                          size: Dimensions.font10 * 1.6,
                         ),
                       ],
                     ),
@@ -223,7 +223,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                         SmallText(
                           text: payments.paymentPartner.toString(),
                           color: AppColors.mainBlackColor,
-                          size: 18,
+                          size: Dimensions.font10 * 1.6,
                         ),
                         SizedBox(
                           height: Dimensions.height15,
@@ -231,7 +231,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                         SmallText(
                           text: payments.paymentMethod.toString(),
                           color: AppColors.mainBlackColor,
-                          size: 18,
+                          size: Dimensions.font10 * 1.6,
                         ),
                         SizedBox(
                           height: Dimensions.height15,
@@ -239,7 +239,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                         SmallText(
                           text: payments.paidAmount.toString(),
                           color: AppColors.mainBlackColor,
-                          size: 18,
+                          size: Dimensions.font10 * 1.6,
                         ),
                         SizedBox(
                           height: Dimensions.height20 * 0.92,
@@ -247,7 +247,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                         SmallText(
                           text: payments.status.toString(),
                           color: AppColors.mainBlackColor,
-                          size: 18,
+                          size: Dimensions.font10 * 1.6,
                         ),
                       ],
                     ),

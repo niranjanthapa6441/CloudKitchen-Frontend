@@ -46,4 +46,9 @@ class RestaurantController extends GetxController {
       showCustomSnackBar(error.message, title: "Restaurants");
     }
   }
+
+  void onClose() {
+    _restaurants.clear();
+    super.onClose();
+  }
 }

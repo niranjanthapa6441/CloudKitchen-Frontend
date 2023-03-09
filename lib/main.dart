@@ -1,3 +1,4 @@
+import 'package:cloud_kitchen/pages/homepage/homepage.dart';
 import 'package:cloud_kitchen/pages/homepage/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,8 +18,13 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+    
   @override
   Widget build(BuildContext context) {
+    Get.find<FoodController>().onClose();
+    Get.find<RestaurantController>().onClose();
+    Get.find<OrderController>().onClose();
+    Get.find<PaymentController>().onClose();
     Get.find<FoodController>().getFoodDetails();
     Get.find<RestaurantController>().getRestaurantDetails();
     Get.find<OrderController>().getOrders();

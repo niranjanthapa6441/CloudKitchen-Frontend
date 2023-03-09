@@ -54,4 +54,9 @@ class OrderController extends GetxController {
     update();
     return responseModel;
   }
+
+  void onClose() {
+    _customerOrderDetails.clear();
+    super.onClose();
+  }
 }

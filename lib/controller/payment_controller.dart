@@ -46,18 +46,18 @@ class PaymentController extends GetxController {
     }
   }
 
-  @override
-  void onClose() {
-    clear();
-    super.onClose();
-  }
-
   Future<void> loadMore() async {
     if (_currentPage < _totalPages) {
       AppConstant.page += 1;
       AppConstant.ordersURi();
       get();
     }
+  }
+
+  @override
+  void onClose() {
+    clear();
+    super.onClose();
   }
 
   void clear() {

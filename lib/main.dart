@@ -1,5 +1,7 @@
+import 'package:cloud_kitchen/controller/menu_by_restaurant_controller.dart';
 import 'package:cloud_kitchen/pages/homepage/homepage.dart';
 import 'package:cloud_kitchen/pages/homepage/navigation.dart';
+import 'package:cloud_kitchen/pages/menu_by_restaurant/menu_by_restaurant_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_kitchen/utils/helper/dependencies.dart' as dep;
@@ -18,17 +20,20 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-    
+
   @override
   Widget build(BuildContext context) {
     Get.find<FoodController>().onClose();
     Get.find<RestaurantController>().onClose();
     Get.find<OrderController>().onClose();
     Get.find<PaymentController>().onClose();
+    Get.find<MenuByRestaurantController>().onClose();
     Get.find<FoodController>().get();
     Get.find<RestaurantController>().get();
     Get.find<OrderController>().get();
     Get.find<PaymentController>().get();
+    Get.find<MenuByRestaurantController>().get();
+
     return GetMaterialApp(
       title: 'Cloud Kitchen',
       theme: ThemeData(

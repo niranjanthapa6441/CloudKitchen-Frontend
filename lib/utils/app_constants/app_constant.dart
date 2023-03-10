@@ -25,10 +25,8 @@ class AppConstant {
   static String longitude = "";
   static String userURI = "/user";
   static String searchFoodsURI = "";
-  static String restaurantURI =
-      "$apiVersion/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
-  static String restaurantMenuURI =
-      "$apiVersion/menu/restaurant/$restaurantId?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&";
+  static String restaurantURI = "";
+  static String restaurantMenuURI = "";
   static String paymentsURI = "";
   static String ordersURI = "";
   static String categoryURI = "$apiVersion/category";
@@ -42,7 +40,7 @@ class AppConstant {
 
   static String searchFoodsURi() {
     searchFoodsURI =
-        "$apiVersion/menu?foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
+        "$apiVersion/menu?restaurantId=$restaurantId&foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
     ;
     return searchFoodsURI;
   }
@@ -58,5 +56,17 @@ class AppConstant {
     paymentsURI =
         "$apiVersion/payment?page=$page&startDate=$startDate&endDate=$endDate&username=$username&period=$period&paymentPartner=$paymentPartner&paymentMethod=$paymentMethod&size=$size";
     return paymentsURI;
+  }
+
+  static String restaurantMenuURi() {
+    restaurantMenuURI =
+        "$apiVersion/menu/restaurant?sortBy=$sortBy&size=$size&category=$category&page=$page&restaurantId=$restaurantId&foodName=$foodName&rating=$rating";
+    return restaurantMenuURI;
+  }
+
+  static String restaurantURi() {
+    restaurantURI =
+      "$apiVersion/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
+    return restaurantURI;
   }
 }

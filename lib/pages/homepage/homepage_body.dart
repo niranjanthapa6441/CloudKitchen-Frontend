@@ -1,4 +1,5 @@
 import 'package:cloud_kitchen/Response/restaurants.dart';
+import 'package:cloud_kitchen/controller/menu_by_restaurant_controller.dart';
 import 'package:cloud_kitchen/controller/restaurant_controller.dart';
 import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +94,7 @@ class _HomePageBodyState extends State<HomePageBody> {
           return GestureDetector(
             child: restaurants.isLoaded
                 ? Container(
-                    height: Dimensions.height10 * 70,
+                    height: Dimensions.height10 * 130,
                     child: ListView.builder(
                         controller: scrollController,
                         shrinkWrap: true,
@@ -252,127 +253,116 @@ class _HomePageBodyState extends State<HomePageBody> {
   }
 
   Widget _buildPopularRestaurant(int index, Restaurants restaurant) {
-    return Container(
-      margin: EdgeInsets.only(
-          top: Dimensions.height5,
-          bottom: Dimensions.height5,
+    return GestureDetector(
+      child: Container(
+        margin: EdgeInsets.only(
+            top: Dimensions.height5,
+            bottom: Dimensions.height5,
+            left: Dimensions.width10,
+            right: Dimensions.width10),
+        padding: EdgeInsets.only(
           left: Dimensions.width10,
-          right: Dimensions.width10),
-      padding: EdgeInsets.only(
-        left: Dimensions.width10,
-        right: Dimensions.width10,
-      ),
-      height: Dimensions.height10 * 12,
-      width: Dimensions.width20 * 20,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Dimensions.radius20),
-        color: Color.fromARGB(255, 255, 255, 255),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 238, 236, 236),
-            blurRadius: Dimensions.radius5,
-            offset: Offset(0, 5),
-          ),
-          BoxShadow(
-            color: Color.fromARGB(255, 249, 248, 248),
-            offset: Offset(-5, 0),
-          ),
-          BoxShadow(
-            color: Color.fromARGB(255, 251, 250, 250),
-            offset: Offset(5, 0),
-          )
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(
-              top: Dimensions.height10,
-              bottom: Dimensions.height10,
+          right: Dimensions.width10,
+        ),
+        height: Dimensions.height10 * 25,
+        width: Dimensions.width20 * 20,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(Dimensions.radius20),
+          color: Color.fromARGB(255, 255, 255, 255),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 238, 236, 236),
+              blurRadius: Dimensions.radius5,
+              offset: Offset(0, 5),
             ),
-            height: Dimensions.height10 * 10,
-            width: Dimensions.width10 * 10,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(AppConstant.baseURL +
-                      AppConstant.apiVersion +
-                      restaurant.imagePath.toString()),
-                ),
-                borderRadius: BorderRadius.circular(Dimensions.radius10)),
-          ),
-          Expanded(
-            child: Container(
+            BoxShadow(
+              color: Color.fromARGB(255, 249, 248, 248),
+              offset: Offset(-5, 0),
+            ),
+            BoxShadow(
+              color: Color.fromARGB(255, 251, 250, 250),
+              offset: Offset(5, 0),
+            )
+          ],
+        ),
+        child: Column(
+          children: [
+            Container(
+              height: Dimensions.height10 * 15,
               width: Dimensions.width20 * 20,
-              padding: EdgeInsets.only(
-                  left: Dimensions.width10,
-                  right: Dimensions.width10,
-                  top: Dimensions.height15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BigText(
-                    text: restaurant.name.toString(),
-                    size: Dimensions.font10 * 1.5,
-                    textOverflow: TextOverflow.ellipsis,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(AppConstant.baseURL +
+                        AppConstant.apiVersion +
+                        restaurant.imagePath.toString()),
                   ),
-                  SizedBox(
-                    height: Dimensions.height10,
-                  ),
-                  SmallText(
-                    text: restaurant.address.toString(),
-                    color: Colors.black,
-                    size: Dimensions.font10 * 1.3,
-                    textOverflow: TextOverflow.ellipsis,
-                  ),
-                  SizedBox(
-                    height: Dimensions.height10,
-                  ),
-                  Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconAndTextWidget(
-                            icon: Icons.star,
-                            text: '4.0',
-                            size: Dimensions.font10 * 1.3,
-                            iconColor: AppColors.iconColor1,
-                          ),
-                          IconAndTextWidget(
-                            icon: Icons.timer,
-                            text: '15 mins',
-                            size: Dimensions.font10 * 1.3,
-                            iconColor: AppColors.mainColor,
-                          ),
-                          IconAndTextWidget(
-                            icon: Icons.location_on,
-                            text: '1.5 k.ms',
-                            size: Dimensions.font10 * 1.3,
-                            iconColor: AppColors.iconColor2,
-                          ),
-                        ]),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SmallText(
-                        text: "View Menu",
-                        color: AppColors.mainBlackColor,
-                        size: Dimensions.font10 * 1.4,
-                      ),
-                      Icon(
-                        Icons.arrow_forward,
-                        color: AppColors.mainBlackColor,
-                        size: Dimensions.height10 * 1.6,
-                      ),
-                    ],
-                  ),
-                ],
+                  borderRadius: BorderRadius.circular(Dimensions.radius10)),
+            ),
+            Expanded(
+              child: Container(
+                width: Dimensions.width20 * 20,
+                padding: EdgeInsets.only(
+                    left: Dimensions.width10,
+                    right: Dimensions.width10,
+                    top: Dimensions.height10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BigText(
+                      text: restaurant.name.toString(),
+                      size: Dimensions.font10 * 1.5,
+                      textOverflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    SmallText(
+                      text: restaurant.address.toString(),
+                      color: Colors.black,
+                      size: Dimensions.font10 * 1.3,
+                      textOverflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Container(
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconAndTextWidget(
+                              icon: Icons.star,
+                              text: '4.0',
+                              size: Dimensions.font10 * 1.3,
+                              iconColor: AppColors.iconColor1,
+                            ),
+                            IconAndTextWidget(
+                              icon: Icons.timer,
+                              text: '15 mins',
+                              size: Dimensions.font10 * 1.3,
+                              iconColor: AppColors.mainColor,
+                            ),
+                            IconAndTextWidget(
+                              icon: Icons.location_on,
+                              text: '1.5 k.ms',
+                              size: Dimensions.font10 * 1.3,
+                              iconColor: AppColors.iconColor2,
+                            ),
+                          ]),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      onTap: () {
+        AppConstant.restaurantId = restaurant.id.toString();
+        Get.find<MenuByRestaurantController>().clear();
+        Get.find<MenuByRestaurantController>().get();
+        Get.toNamed(RouteHelper.getRestaurantMenu());
+      },
     );
   }
 }

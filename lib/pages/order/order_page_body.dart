@@ -225,10 +225,11 @@ class OrderPageBody extends StatelessWidget {
         //   },
         // ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     height: Dimensions.height10 * 7,
@@ -236,10 +237,10 @@ class OrderPageBody extends StatelessWidget {
                     padding: EdgeInsets.only(
                         bottom: Dimensions.height10, top: Dimensions.height10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BigText(
-                          text: 'Total: ',
+                          text: 'Subtotal: ',
                           color: Colors.black,
                           size: Dimensions.font10 * 1.8,
                         ),
@@ -266,7 +267,7 @@ class OrderPageBody extends StatelessWidget {
                     padding: EdgeInsets.only(
                         bottom: Dimensions.height10, top: Dimensions.height10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         SmallText(
                           text: order.totalPrice.toString(),
@@ -294,7 +295,7 @@ class OrderPageBody extends StatelessWidget {
           thickness: 2,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               child: Column(
@@ -305,7 +306,7 @@ class OrderPageBody extends StatelessWidget {
                     padding: EdgeInsets.only(
                         bottom: Dimensions.height10, top: Dimensions.height10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BigText(
                           text: 'Total Paid Amount: ',
@@ -327,7 +328,7 @@ class OrderPageBody extends StatelessWidget {
                     padding: EdgeInsets.only(
                         bottom: Dimensions.height10, top: Dimensions.height10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         SmallText(
                           text: order.totalPrice.toString(),

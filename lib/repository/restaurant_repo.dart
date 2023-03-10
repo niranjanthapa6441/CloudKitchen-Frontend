@@ -10,6 +10,6 @@ class RestaurantRepo {
 
   Future<Response> getRestaurants() async {
     return await apiClient.getData(
-        AppConstant.restaurantURI, apiClient.mainHeaders);
+        AppConstant.restaurantURi(), apiClient.mainHeaders);
   }
 }

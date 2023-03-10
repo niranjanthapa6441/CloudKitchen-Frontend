@@ -5,6 +5,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import '../Response/error_response.dart';
 import '../base/show_custom_snack_bar.dart';
 import '../repository/restaurant_repo.dart';
+import '../utils/app_constants/app_constant.dart';
 
 class RestaurantController extends GetxController {
   final RestaurantRepo restaurantRepo;
@@ -39,15 +40,26 @@ class RestaurantController extends GetxController {
       _isLoaded = true;
 
       update();
-    } else {
-      Response response = await restaurantRepo.getRestaurants();
-      ErrorResponse error = ErrorResponse.fromJson(response.body);
-      showCustomSnackBar(error.message, title: "Restaurants");
+    } 
+  }
+
+  Future<void> loadMore() async {
+    if (_currentPage < _totalPages) {
+      AppConstant.page += 1;
+      AppConstant.restaurantURi();
+      get();
     }
   }
+
   @override
   void onClose() {
-    _restaurants.clear();
+    clear();
     super.onClose();
+  }
+
+  void clear() {
+    _restaurants.clear();
+    AppConstant.page = 1;
+    AppConstant.restaurantURi();
   }
 }

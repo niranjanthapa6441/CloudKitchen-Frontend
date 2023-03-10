@@ -122,154 +122,154 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
     int year = dateTime.year;
     String monthName = DateFormat('MMMM').format(dateTime);
     int day = dateTime.day;
-    return Container(
-      margin: EdgeInsets.only(
-          left: Dimensions.width10,
-          right: Dimensions.width10,
-          top: Dimensions.height10,
-          bottom: Dimensions.height10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(Dimensions.radius20),
-        color: Color.fromARGB(255, 255, 255, 255),
-        boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 238, 236, 236),
-            blurRadius: Dimensions.radius5,
-            offset: Offset(0, 5),
-          ),
-          BoxShadow(
-            color: Color.fromARGB(255, 249, 248, 248),
-            offset: Offset(-5, 0),
-          ),
-          BoxShadow(
-            color: Color.fromARGB(255, 251, 250, 250),
-            offset: Offset(5, 0),
-          )
-        ],
-      ),
-      height: Dimensions.width10 * 20,
-      child: Column(
-        children: [
-          Container(
-            child: Row(
-              children: [
-                //imageContainer
-                Container(
-                  width: Dimensions.width10 * 11,
-                  height: Dimensions.height10 * 12,
-                  margin: EdgeInsets.only(
-                      left: Dimensions.width10,
-                      right: Dimensions.width10,
-                      bottom: Dimensions.height10,
-                      top: Dimensions.height10),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      BigText(
-                        text: day.toString(),
-                        color: Color.fromARGB(255, 9, 9, 9),
-                        size: Dimensions.font30,
-                      ),
-                      SmallText(
-                        text: monthName,
-                        color: Color.fromARGB(255, 9, 9, 9),
-                        size: Dimensions.font10 * 1.8,
-                      ),
-                      SmallText(
-                        text: year.toString(),
-                        color: Color.fromARGB(255, 14, 13, 13),
-                        size: Dimensions.font10 * 1.6,
-                      )
-                    ],
-                  ),
-                ),
-                //textContainer
-                Expanded(
-                  child: Container(
-                    width: Dimensions.width30 * 30,
-                    height: Dimensions.height10 * 19,
-                    padding: EdgeInsets.only(top: Dimensions.height10),
+    return GestureDetector(
+      child: Container(
+        margin: EdgeInsets.only(
+            left: Dimensions.width10,
+            right: Dimensions.width10,
+            top: Dimensions.height10,
+            bottom: Dimensions.height10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(Dimensions.radius20),
+          color: Color.fromARGB(255, 255, 255, 255),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromARGB(255, 238, 236, 236),
+              blurRadius: Dimensions.radius5,
+              offset: Offset(0, 5),
+            ),
+            BoxShadow(
+              color: Color.fromARGB(255, 249, 248, 248),
+              offset: Offset(-5, 0),
+            ),
+            BoxShadow(
+              color: Color.fromARGB(255, 251, 250, 250),
+              offset: Offset(5, 0),
+            )
+          ],
+        ),
+        height: Dimensions.width10 * 20,
+        child: Column(
+          children: [
+            Container(
+              child: Row(
+                children: [
+                  //imageContainer
+                  Container(
+                    width: Dimensions.width10 * 11,
+                    height: Dimensions.height10 * 12,
+                    margin: EdgeInsets.only(
+                        left: Dimensions.width10,
+                        right: Dimensions.width10,
+                        bottom: Dimensions.height10,
+                        top: Dimensions.height10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SmallText(
-                          text: "Order Time: ",
-                          color: AppColors.mainBlackColor,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height15,
+                        BigText(
+                          text: day.toString(),
+                          color: Color.fromARGB(255, 9, 9, 9),
+                          size: Dimensions.font30,
                         ),
                         SmallText(
-                          text: "Total Items: ",
-                          color: AppColors.mainBlackColor,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height15,
+                          text: monthName,
+                          color: Color.fromARGB(255, 9, 9, 9),
+                          size: Dimensions.font10 * 1.8,
                         ),
                         SmallText(
-                          text: "Paid Amount: ",
-                          color: AppColors.mainBlackColor,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height15,
-                        ),
-                        SmallText(
-                          text: "Status: ",
-                          color: AppColors.mainBlackColor,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height20 * 0.92,
-                        ),
+                          text: year.toString(),
+                          color: Color.fromARGB(255, 14, 13, 13),
+                          size: Dimensions.font10 * 1.6,
+                        )
                       ],
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(top: Dimensions.height10),
-                    width: Dimensions.width30 * 30,
-                    height: Dimensions.height10 * 19,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SmallText(
-                          text: orders.orderTime.toString(),
-                          color: AppColors.mainBlackColor,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height15,
-                        ),
-                        SmallText(
-                          text: orders.totalItems.toString(),
-                          color: AppColors.mainBlackColor,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height15,
-                        ),
-                        SmallText(
-                          text: orders.totalPrice.toString(),
-                          color: AppColors.mainBlackColor,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height15,
-                        ),
-                        SmallText(
-                          text: orders.status.toString(),
-                          color: AppColors.mainBlackColor,
-                          size: 18,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height20 * 0.92,
-                        ),
-                        GestureDetector(
-                          child: Row(
+                  //textContainer
+                  Expanded(
+                    child: Container(
+                      width: Dimensions.width30 * 30,
+                      height: Dimensions.height10 * 19,
+                      padding: EdgeInsets.only(top: Dimensions.height10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SmallText(
+                            text: "Order Time: ",
+                            color: AppColors.mainBlackColor,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height15,
+                          ),
+                          SmallText(
+                            text: "Total Items: ",
+                            color: AppColors.mainBlackColor,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height15,
+                          ),
+                          SmallText(
+                            text: "Paid Amount: ",
+                            color: AppColors.mainBlackColor,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height15,
+                          ),
+                          SmallText(
+                            text: "Status: ",
+                            color: AppColors.mainBlackColor,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height20 * 0.92,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(top: Dimensions.height10),
+                      width: Dimensions.width30 * 30,
+                      height: Dimensions.height10 * 19,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SmallText(
+                            text: orders.orderTime.toString(),
+                            color: AppColors.mainBlackColor,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height15,
+                          ),
+                          SmallText(
+                            text: orders.totalItems.toString(),
+                            color: AppColors.mainBlackColor,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height15,
+                          ),
+                          SmallText(
+                            text: orders.totalPrice.toString(),
+                            color: AppColors.mainBlackColor,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height15,
+                          ),
+                          SmallText(
+                            text: orders.status.toString(),
+                            color: AppColors.mainBlackColor,
+                            size: 18,
+                          ),
+                          SizedBox(
+                            height: Dimensions.height20 * 0.92,
+                          ),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               SmallText(
@@ -283,18 +283,17 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
                               ),
                             ],
                           ),
-                          onTap: () =>
-                              Get.toNamed(RouteHelper.getOrderDetail(index)),
-                        )
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      onTap: () => Get.toNamed(RouteHelper.getOrderDetail(index)),
     );
   }
 

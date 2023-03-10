@@ -1,8 +1,10 @@
 import 'package:cloud_kitchen/pages/cart/cart_page.dart';
 import 'package:cloud_kitchen/pages/food/food_page.dart';
+import 'package:cloud_kitchen/pages/menu_by_restaurant/menu_by_restaurant_page.dart';
 import 'package:cloud_kitchen/pages/order/order_page.dart';
 import 'package:cloud_kitchen/pages/orders/orders_page.dart';
 import 'package:cloud_kitchen/pages/payment_details/payment_details_page.dart';
+import 'package:cloud_kitchen/pages/restauraunt_menu_food/restaurant_menu_food_page.dart';
 import 'package:cloud_kitchen/pages/search_food/search_food_page.dart';
 import 'package:get/get.dart';
 
@@ -29,6 +31,8 @@ class RouteHelper {
   static const String availablePaymentMethods = '/availablePaymentMethods';
   static const String updateProfile = '/updateProfile';
   static const String khaltiPayment = '/khaltiPayment';
+    static const String restaurantMenuFood = '/restaurantMenu/food';
+
 
   static String getInitial() => initial;
   static String getNavigation() => navigation;
@@ -44,6 +48,7 @@ class RouteHelper {
   static String getAvailablePaymentMethods() => availablePaymentMethods;
   static String getConfirmOrder() => confirmOrder;
   static String getFoodDetail(int foodId) => '$foodDetail?foodId=$foodId';
+  static String getRestaurantMenuFoodDetail(int foodId) => '$restaurantMenuFood?foodId=$foodId';
   static String getCart() => cart;
   static String getUpdTeProfile() => updateProfile;
   static String getPayments() => payments;
@@ -56,6 +61,8 @@ class RouteHelper {
     GetPage(name: viewProfile, page: () => const ProfilePage()),
     GetPage(name: payments, page: () => const PaymentDetailsPage()),
     GetPage(name: cart, page: () => const CartPage()),
+    GetPage(name: restaurantMenu, page: () => const RestaurantMenu()),
+
     GetPage(
         name: orderDetail,
         page: () {
@@ -69,6 +76,14 @@ class RouteHelper {
         page: () {
           var foodId = Get.parameters['foodId'];
           return FoodPage(
+            foodId: int.parse(foodId!),
+          );
+        }),
+    GetPage(
+        name: restaurantMenuFood,
+        page: () {
+          var foodId = Get.parameters['foodId'];
+          return RestaurantMenuFoodPage(
             foodId: int.parse(foodId!),
           );
         }),

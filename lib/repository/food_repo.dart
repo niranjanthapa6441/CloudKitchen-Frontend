@@ -9,6 +9,7 @@ class FoodRepo {
   FoodRepo({required this.apiClient});
 
   Future<Response> getFoods() async {
+    print(AppConstant.searchFoodsURi());
     return await apiClient.getData(
         AppConstant.searchFoodsURi(), apiClient.mainHeaders);
   }

@@ -390,7 +390,7 @@ class _SearchFoodPageBodyState extends State<SearchFoodPageBody> {
 
   double _height(List<dynamic> foods) {
     double height = 0;
-    for (int i = 0; i < foods!.length; i++) {
+    for (int i = 0; i < foods.length; i++) {
       height += Dimensions.height10 * 20;
     }
 

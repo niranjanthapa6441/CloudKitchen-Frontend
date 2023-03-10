@@ -1,9 +1,6 @@
 import 'package:cloud_kitchen/controller/cart_controller.dart';
 import 'package:cloud_kitchen/model/cart.dart';
-import 'package:cloud_kitchen/route_helper/route_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 import '../../utils/Color/colors.dart';
@@ -40,115 +37,78 @@ class _CartPageBodyState extends State<CartPageBody> {
                 }),
           ));
         }),
-        // GetBuilder<OrderController>(
-        //   builder: (orders) {
-        //     return GestureDetector(
-        //       child: orders.isLoaded
-        //           ? Container(
-        //               //height: Dimensions.height10 * 32,
-        //               margin: EdgeInsets.only(
-        //                   top: Dimensions.height10, bottom: Dimensions.height5),
-        //               child: SingleChildScrollView(
-        //                 physics: AlwaysScrollableScrollPhysics(),
-        //                 child: Table(
-        //                   columnWidths: const {
-        //                     0: FlexColumnWidth(2.8),
-        //                     1: FlexColumnWidth(2.2),
-        //                     2: FlexColumnWidth(2),
-        //                     3: FlexColumnWidth(2),
-        //                   },
-        //                   border: TableBorder.all(
-        //                     color: Colors.grey,
-        //                     width: 1.0,
-        //                     style: BorderStyle.solid,
-        //                   ),
-        //                   children: [
-        //                     TableRow(
-        //                       decoration: BoxDecoration(
-        //                         color: Colors.grey[300],
-        //                       ),
-        //                       children: [
-        //                         Padding(
-        //                           padding: const EdgeInsets.all(8.0),
-        //                           child: Text(
-        //                             'Food Name',
-        //                             style: TextStyle(
-        //                               fontWeight: FontWeight.bold,
-        //                               fontSize: 18,
-        //                             ),
-        //                           ),
-        //                         ),
-        //                         Padding(
-        //                           padding: const EdgeInsets.all(8.0),
-        //                           child: Text(
-        //                             'Quantity',
-        //                             style: TextStyle(
-        //                               fontWeight: FontWeight.bold,
-        //                               fontSize: 18,
-        //                             ),
-        //                           ),
-        //                         ),
-        //                         Padding(
-        //                           padding: const EdgeInsets.all(8.0),
-        //                           child: Text(
-        //                             'Unit Price',
-        //                             style: TextStyle(
-        //                               fontWeight: FontWeight.bold,
-        //                               fontSize: 18,
-        //                             ),
-        //                           ),
-        //                         ),
-        //                         Padding(
-        //                           padding: const EdgeInsets.all(8.0),
-        //                           child: Text(
-        //                             'Price',
-        //                             style: TextStyle(
-        //                               fontWeight: FontWeight.bold,
-        //                               fontSize: 18,
-        //                             ),
-        //                           ),
-        //                         ),
-        //                       ],
-        //                     ),
-        //                     for (var i = 0; i < orderFoods!.length; i++)
-        //                       TableRow(
-        //                         children: [
-        //                           Padding(
-        //                             padding: const EdgeInsets.all(8.0),
-        //                             child: Text(orderFoods[i].name.toString()),
-        //                           ),
-        //                           Padding(
-        //                             padding: const EdgeInsets.all(8.0),
-        //                             child:
-        //                                 Text(orderFoods[i].quantity.toString()),
-        //                           ),
-        //                           Padding(
-        //                             padding: const EdgeInsets.all(8.0),
-        //                             child: Text(
-        //                                 orderFoods[i].unitPrice.toString()),
-        //                           ),
-        //                           Padding(
-        //                             padding: const EdgeInsets.all(8.0),
-        //                             child: Text(orderFoods[i].price.toString()),
-        //                           ),
-        //                         ],
-        //                       ),
-        //                   ],
-        //                 ),
-        //               ),
-        //             )
-        //           : CircularProgressIndicator.adaptive(
-        //               backgroundColor: Color.fromARGB(255, 3, 3, 3),
-        //             ),
-        //     );
-        //   },
-        // ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: Dimensions.height10 * 7,
+                    width: Dimensions.width10 * 18,
+                    padding: EdgeInsets.only(
+                        bottom: Dimensions.height10, top: Dimensions.height10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BigText(
+                          text: 'Subtotal: ',
+                          color: Colors.black,
+                          size: Dimensions.font10 * 1.8,
+                        ),
+                        SizedBox(
+                          height: Dimensions.height5,
+                        ),
+                        BigText(
+                          text: 'Delivery Charge: ',
+                          color: Colors.black,
+                          size: Dimensions.font10 * 1.8,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    height: Dimensions.height10 * 7,
+                    width: Dimensions.width10 * 9,
+                    padding: EdgeInsets.only(
+                        bottom: Dimensions.height10, top: Dimensions.height10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SmallText(
+                          text: _totalPrice().toString(),
+                          color: Colors.black,
+                          size: Dimensions.font10 * 1.6,
+                        ),
+                        SizedBox(
+                          height: Dimensions.height5,
+                        ),
+                        SmallText(
+                          text: '0',
+                          color: Colors.black,
+                          size: Dimensions.font10 * 1.6,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
         Divider(
           color: Colors.black,
           thickness: 2,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               child: Column(
@@ -159,7 +119,7 @@ class _CartPageBodyState extends State<CartPageBody> {
                     padding: EdgeInsets.only(
                         bottom: Dimensions.height10, top: Dimensions.height10),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BigText(
                           text: 'Total Amount: ',
@@ -172,30 +132,26 @@ class _CartPageBodyState extends State<CartPageBody> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                child: Column(
-                  children: [
-                    Container(
-                      height: Dimensions.height10 * 7,
-                      width: Dimensions.width10 * 8,
-                      padding: EdgeInsets.only(
-                          bottom: Dimensions.height10,
-                          top: Dimensions.height10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SmallText(
-                            text: _totalPrice().toString(),
-                            color: Colors.black,
-                            size: Dimensions.font10 * 1.6,
-                          ),
-                        ],
-                      ),
+            Container(
+              child: Column(
+                children: [
+                  Container(
+                    height: Dimensions.height10 * 7,
+                    width: Dimensions.width10 * 8,
+                    padding: EdgeInsets.only(
+                        bottom: Dimensions.height10, top: Dimensions.height10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SmallText(
+                          text: _totalPrice().toString(),
+                          color: Colors.black,
+                          size: Dimensions.font10 * 1.6,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -273,7 +229,7 @@ class _CartPageBodyState extends State<CartPageBody> {
                           item.food.name.toString(),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: Dimensions.font10 * 1.8,
+                            fontSize: Dimensions.font10 * 1.7,
                           ),
                         ),
                         SizedBox(
@@ -369,8 +325,8 @@ class _CartPageBodyState extends State<CartPageBody> {
   }
 
   double _totalPrice() {
-    List<CartItem> cartItems = Get.find<CartController>().cartItems;
     double price = 0;
+    List<CartItem> cartItems = Get.find<CartController>().cartItems;
     for (var item in cartItems) {
       price += item.price;
     }

@@ -1,3 +1,5 @@
+import 'package:cloud_kitchen/controller/menu_by_restaurant_controller.dart';
+import 'package:cloud_kitchen/controller/restaurant_controller.dart';
 import 'package:cloud_kitchen/pages/restaurant/restaurant_page_body.dart';
 import 'package:cloud_kitchen/pages/search_food/search_food_page_body.dart';
 import 'package:cloud_kitchen/utils/app_constants/app_constant.dart';
@@ -440,8 +442,8 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
                       onTap: () {
                         setState(() {
                           selection = false;
+                          _searchFoods();
                         });
-                        //Get.toNamed(RouteHelper.availablePaymentMethods);
                       },
                       child: Container(
                         height: Dimensions.screenHeight / 18,
@@ -464,7 +466,6 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        //Get.toNamed(RouteHelper.availablePaymentMethods);
                         setState(() {
                           selection = true;
                         });
@@ -525,23 +526,12 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
   }
 
   void _searchRestaurants() {
-    AppConstant.category = categoryDropDownValue;
-
-    AppConstant.foodName = searchCriteria.text.toString();
-
+    AppConstant.restaurantName = searchCriteria.text.toString();
     if (ratingDropDownValue != '') {
-      AppConstant.rating = double.parse(ratingDropDownValue.trim());
+      AppConstant.restaurantRating = double.parse(ratingDropDownValue.trim());
     }
-
-    if (priceDropDownValue.toLowerCase() == 'low to high') {
-      AppConstant.sortBy = 'price';
-    } else if (priceDropDownValue.toLowerCase() == 'high to low') {
-      AppConstant.sortBy = '-price';
-    }
-    AppConstant.restaurantName = restaurantDropDownValue;
-    Get.find<FoodController>().onClose();
-    Get.find<FoodController>().get();
-    isSearching = false;
+    Get.find<RestaurantController>().onClose();
+    Get.find<RestaurantController>().get();
   }
 
   void _clear() {
@@ -552,8 +542,14 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
     AppConstant.rating = 0.0;
 
     AppConstant.sortBy = '';
+
     AppConstant.restaurantName = '';
+
+    AppConstant.page = 1;
+
     Get.find<FoodController>().onClose();
     Get.find<FoodController>().get();
+    Get.find<RestaurantController>().onClose();
+    Get.find<RestaurantController>().get();
   }
 }

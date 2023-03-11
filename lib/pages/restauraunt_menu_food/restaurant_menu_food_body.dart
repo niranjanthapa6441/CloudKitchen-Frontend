@@ -24,7 +24,6 @@ class RestaurantMenuFoodBody extends StatefulWidget {
 
 class _FoodPageBodyState extends State<RestaurantMenuFoodBody> {
   int quantity = 1;
-  bool _ontap = false;
   @override
   Widget build(BuildContext context) {
     Foods food = Get.find<MenuByRestaurantController>().menus[widget.foodId];
@@ -51,34 +50,42 @@ class _FoodPageBodyState extends State<RestaurantMenuFoodBody> {
               ),
               child: Stack(
                 children: [
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.toNamed(RouteHelper.getCart());
-                      },
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        size: Dimensions.height30,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Get.find<CartController>().hasValue
+                  AppConstant.hasValue
                       ? Positioned(
-                          top: 5,
-                          right: 5,
-                          child: Text(
-                            Get.find<CartController>()
-                                .cartItems
-                                .length
-                                .toString(),
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                          top: 0,
+                          right: 0,
+                          child: IconButton(
+                            onPressed: () {
+                              Get.toNamed(RouteHelper.getCart());
+                            },
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              size: Dimensions.height30,
+                              color: Color.fromARGB(255, 220, 5, 9),
                             ),
+                          ),
+                        )
+                      : Positioned(
+                          top: 0,
+                          right: 0,
+                          child: IconButton(
+                            onPressed: () {
+                              Get.toNamed(RouteHelper.getCart());
+                            },
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              size: Dimensions.height30,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                  AppConstant.hasValue
+                      ? Positioned(
+                          top: 0,
+                          right: 0,
+                          child: BigText(
+                            text: AppConstant.numberOfItems,
+                            color: Color.fromARGB(255, 246, 246, 248),
                           ),
                         )
                       : Container(),
@@ -232,7 +239,7 @@ class _FoodPageBodyState extends State<RestaurantMenuFoodBody> {
                 GestureDetector(
                   onTap: () {
                     addToCart(food, quantity, food.price! * quantity);
-                    Get.toNamed(RouteHelper.getCart());
+                    checkItemsInCart();
                   },
                   child: Container(
                     height: Dimensions.screenHeight / 14,
@@ -266,7 +273,15 @@ class _FoodPageBodyState extends State<RestaurantMenuFoodBody> {
   void addToCart(Foods food, int quantity, double price) {
     setState(() {
       Get.find<CartController>().add(food, quantity, price);
-      Get.find<CartController>().hasValue;
     });
+  }
+
+  checkItemsInCart() {
+    if (Get.find<CartController>().cartItems.length > 0) {
+      AppConstant.numberOfItems =
+          Get.find<CartController>().cartItems.length.toString();
+      AppConstant.hasValue = true;
+    }
+    ;
   }
 }

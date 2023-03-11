@@ -4,6 +4,7 @@ import 'package:cloud_kitchen/controller/restaurant_controller.dart';
 import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../Response/foods.dart';
 import '../../controller/food_controller.dart';
@@ -106,9 +107,7 @@ class _HomePageBodyState extends State<HomePageBody> {
                               index, restaurants.restaurants[index]);
                         }),
                   )
-                : CircularProgressIndicator.adaptive(
-                    backgroundColor: Color.fromARGB(255, 3, 3, 3),
-                  ),
+                : _buildSingleLoadingIndicator(),
           );
         }),
       ],
@@ -363,6 +362,103 @@ class _HomePageBodyState extends State<HomePageBody> {
         Get.find<MenuByRestaurantController>().get();
         Get.toNamed(RouteHelper.getRestaurantMenu());
       },
+    );
+  }
+
+  Widget _buildLoadingIndicator() {
+    return Shimmer(
+      gradient: const LinearGradient(
+        colors: [
+          Color(0xFFEBEBF4),
+          Color(0xFFF4F4F4),
+          Color(0xFFEBEBF4),
+        ],
+        stops: [
+          0.1,
+          0.3,
+          0.4,
+        ],
+        begin: Alignment(-1.0, -0.3),
+        end: Alignment(1.0, 0.3),
+        tileMode: TileMode.clamp,
+      ),
+      child: Container(
+        height: Dimensions.height10 * 62,
+        child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: 5, // You can adjust the number of shimmering cells
+            itemBuilder: (_, __) => _buildSingleLoadingIndicator()),
+      ),
+    );
+  }
+
+  Widget _buildSingleLoadingIndicator() {
+    return Shimmer(
+      gradient: const LinearGradient(
+        colors: [
+          Color(0xFFEBEBF4),
+          Color(0xFFF4F4F4),
+          Color(0xFFEBEBF4),
+        ],
+        stops: [
+          0.1,
+          0.3,
+          0.4,
+        ],
+        begin: Alignment(-1.0, -0.3),
+        end: Alignment(1.0, 0.3),
+        tileMode: TileMode.clamp,
+      ),
+      child: Container(
+        height: Dimensions.height10 * 25,
+        child: Container(
+          padding: EdgeInsets.only(
+              right: Dimensions.width10,
+              left: Dimensions.width10,
+              bottom: Dimensions.height20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: Dimensions.height10 * 15,
+                width: double.infinity,
+                color: Colors.white,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 8.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 8.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: Dimensions.height10 * 2.4,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

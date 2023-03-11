@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../Response/restaurants.dart';
+import '../../controller/food_controller.dart';
 import '../../controller/menu_by_restaurant_controller.dart';
 import '../../controller/restaurant_controller.dart';
 import '../../route_helper/route_helper.dart';
@@ -31,6 +32,7 @@ class _RestaurantPageBodyState extends State<RestaurantPageBody> {
   @override
   void initState() {
     super.initState();
+    _clear();
     _scrollController.addListener(_onScroll);
   }
 
@@ -129,7 +131,7 @@ class _RestaurantPageBodyState extends State<RestaurantPageBody> {
                         AppConstant.apiVersion +
                         restaurant.imagePath.toString()),
                   ),
-                  borderRadius: BorderRadius.circular(Dimensions.radius10)),
+                  borderRadius: BorderRadius.circular(Dimensions.radius20)),
             ),
             Expanded(
               child: Container(
@@ -293,5 +295,14 @@ class _RestaurantPageBodyState extends State<RestaurantPageBody> {
         ),
       ),
     );
+  }
+
+  void _clear() {
+    AppConstant.restaurantRating = 0.0;
+
+    AppConstant.restaurantName = '';
+
+    Get.find<RestaurantController>().onClose();
+    Get.find<RestaurantController>().get();
   }
 }

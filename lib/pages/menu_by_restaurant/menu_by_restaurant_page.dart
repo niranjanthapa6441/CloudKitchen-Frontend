@@ -21,8 +21,6 @@ class RestaurantMenu extends StatefulWidget {
 
 class _RestaurantMenuPageState extends State<RestaurantMenu> {
   ScrollController _scrollController = ScrollController();
-  PageController _pageController = PageController();
-  ScrollController _categoryScrollController = ScrollController();
 
   var _currentPageValue = 0.0;
   var _currentPosition = 0.0;
@@ -30,14 +28,12 @@ class _RestaurantMenuPageState extends State<RestaurantMenu> {
   @override
   void initState() {
     super.initState();
-    _categoryScrollController.addListener(_setIndex);
     _scrollController.addListener(_onScroll);
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
-    _categoryScrollController.dispose();
     _clear();
     super.dispose();
   }
@@ -123,7 +119,6 @@ class _RestaurantMenuPageState extends State<RestaurantMenu> {
                       height: Dimensions.height10 * 5,
                       width: Dimensions.screenWidth,
                       child: ListView.builder(
-                        controller: _categoryScrollController,
                         physics: AlwaysScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         itemCount: menus.categories.length,
@@ -139,13 +134,11 @@ class _RestaurantMenuPageState extends State<RestaurantMenu> {
                       height: Dimensions.height10 * 64,
                       width: Dimensions.screenWidth,
                       child: PageView.builder(
-                        controller: _pageController,
                         onPageChanged: (value) {
                           setState(() {
                             _selectedIndex = value;
                             _selectedCategory = menus.categories[value];
                             _searchFoods();
-                            _setIndex();
                           });
                         },
                         itemCount: menus.categories.length,
@@ -212,7 +205,6 @@ class _RestaurantMenuPageState extends State<RestaurantMenu> {
           _selectedIndex = index;
           _selectedCategory = category;
           _searchFoods();
-          setPage(index);
         });
       },
     );
@@ -588,16 +580,4 @@ class _RestaurantMenuPageState extends State<RestaurantMenu> {
     Get.find<MenuByRestaurantController>().get();
   }
 
-  void setPage(int index) {
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.easeInOut,
-    );
-  }
-
-  void _setIndex() {
-    _categoryScrollController.animateTo(pageController.page!,
-        duration: const Duration(microseconds: 10), curve: Curves.easeInOut);
-  }
 }

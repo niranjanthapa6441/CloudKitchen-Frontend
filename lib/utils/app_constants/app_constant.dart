@@ -3,12 +3,15 @@ class AppConstant {
   static const String baseURL = "http://127.0.0.1:8080/cloudKitchen";
   static String apiVersion = "/api/v1";
 
+  static bool hasValue = false;
+  static String numberOfItems = "";
   static String userId = "1";
   static String orderId = "";
   static String menuFoodId = "";
   static String category = "";
   static String meal = "";
   static double rating = 0.0;
+  static double restaurantRating = 0.0;
   static String restaurantName = "";
   static int page = 1;
   static int size = 5;
@@ -66,7 +69,7 @@ class AppConstant {
 
   static String restaurantURi() {
     restaurantURI =
-      "$apiVersion/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$rating";
+        "$apiVersion/restaurant?restaurantName=$restaurantName&page=$page&size=$size&latittude=$latitude&longitude=$longitude&rating=$restaurantRating";
     return restaurantURI;
   }
 }

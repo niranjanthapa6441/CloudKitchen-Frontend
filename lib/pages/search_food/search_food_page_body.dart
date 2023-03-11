@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../Response/foods.dart';
+import '../../controller/restaurant_controller.dart';
 import '../../utils/app_constants/app_constant.dart';
 import '../../widgets/big_text.dart';
 import '../../widgets/icon_and_text_widget.dart';
@@ -30,6 +31,7 @@ class _SearchFoodPageBodyState extends State<SearchFoodPageBody> {
   @override
   void dispose() {
     _scrollController.dispose();
+    _clear();
     super.dispose();
   }
 
@@ -395,5 +397,19 @@ class _SearchFoodPageBodyState extends State<SearchFoodPageBody> {
     }
 
     return height;
+  }
+
+  void _clear() {
+    AppConstant.category = '';
+
+    AppConstant.foodName = '';
+
+    AppConstant.rating = 0.0;
+
+    AppConstant.sortBy = '';
+
+
+    Get.find<FoodController>().onClose();
+    Get.find<FoodController>().get();
   }
 }

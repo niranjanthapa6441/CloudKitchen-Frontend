@@ -7,6 +7,8 @@ import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/app_constants/app_constant.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -56,14 +58,44 @@ class _HomepageState extends State<Homepage> {
                   height: Dimensions.height30,
                   width: Dimensions.width300,
                 ),
-                IconButton(
-                  onPressed: () {
-                    Get.toNamed(RouteHelper.getCart());
-                  },
-                  icon: Icon(
-                    Icons.shopping_cart,
-                    size: Dimensions.height30,
-                  ),
+                Stack(
+                  children: [
+                    AppConstant.hasValue
+                        ? Positioned(
+                            child: IconButton(
+                              onPressed: () {
+                                Get.toNamed(RouteHelper.getCart());
+                              },
+                              icon: Icon(
+                                Icons.shopping_cart,
+                                size: Dimensions.height30,
+                                color: Color.fromARGB(255, 238, 116, 10),
+                              ),
+                            ),
+                          )
+                        : Positioned(
+                            child: IconButton(
+                              onPressed: () {
+                                Get.toNamed(RouteHelper.getCart());
+                              },
+                              icon: Icon(
+                                Icons.shopping_cart,
+                                size: Dimensions.height30,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                    AppConstant.hasValue
+                        ? Positioned(
+                            top: 0,
+                            right: 0,
+                            child: BigText(
+                              text: AppConstant.numberOfItems,
+                              color: Colors.black,
+                            ),
+                          )
+                        : Container(),
+                  ],
                 ),
               ],
             ),

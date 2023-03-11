@@ -2,6 +2,7 @@ import 'package:cloud_kitchen/Response/foods.dart';
 import 'package:cloud_kitchen/controller/cart_controller.dart';
 import 'package:cloud_kitchen/controller/food_controller.dart';
 import 'package:cloud_kitchen/model/cart.dart';
+import 'package:cloud_kitchen/pages/homepage/homepage.dart';
 import 'package:cloud_kitchen/route_helper/route_helper.dart';
 import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
 import 'package:cloud_kitchen/widgets/big_text.dart';
@@ -22,8 +23,14 @@ class FoodPageBody extends StatefulWidget {
 
 class _FoodPageBodyState extends State<FoodPageBody> {
   int quantity = 1;
-  bool _ontap = false;
-  List<CartItem> cartItems = <CartItem>[];
+
+  @override
+  void initState() {
+    super.initState();
+    checkItemsInCart();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Foods food = Get.find<FoodController>().foods[widget.foodId];
@@ -50,34 +57,42 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               ),
               child: Stack(
                 children: [
-                  Positioned(
-                    top: 0,
-                    right: 0,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.toNamed(RouteHelper.getCart());
-                      },
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        size: Dimensions.height30,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Get.find<CartController>().hasValue
+                  AppConstant.hasValue
                       ? Positioned(
-                          top: 5,
-                          right: 5,
-                          child: Text(
-                            Get.find<CartController>()
-                                .cartItems
-                                .length
-                                .toString(),
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                          top: 0,
+                          right: 0,
+                          child: IconButton(
+                            onPressed: () {
+                              Get.toNamed(RouteHelper.getCart());
+                            },
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              size: Dimensions.height30,
+                              color: Color.fromARGB(255, 248, 247, 247),
                             ),
+                          ),
+                        )
+                      : Positioned(
+                          top: 0,
+                          right: 0,
+                          child: IconButton(
+                            onPressed: () {
+                              Get.toNamed(RouteHelper.getCart());
+                            },
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              size: Dimensions.height30,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                  AppConstant.hasValue
+                      ? Positioned(
+                          top: 0,
+                          right: 0,
+                          child: BigText(
+                            text: AppConstant.numberOfItems,
+                            color: Color.fromARGB(255, 241, 7, 7),
                           ),
                         )
                       : Container(),
@@ -231,7 +246,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 GestureDetector(
                   onTap: () {
                     addToCart(food, quantity, food.price! * quantity);
-                    Get.toNamed(RouteHelper.getCart());
+                    checkItemsInCart();
                   },
                   child: Container(
                     height: Dimensions.screenHeight / 14,
@@ -265,7 +280,15 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   void addToCart(Foods food, int quantity, double price) {
     setState(() {
       Get.find<CartController>().add(food, quantity, price);
-      Get.find<CartController>().hasValue;
     });
+  }
+
+  checkItemsInCart() {
+    if (Get.find<CartController>().cartItems.length > 0) {
+      AppConstant.numberOfItems =
+          Get.find<CartController>().cartItems.length.toString();
+      AppConstant.hasValue = true;
+    }
+    ;
   }
 }

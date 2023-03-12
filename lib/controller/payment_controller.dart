@@ -32,6 +32,8 @@ class PaymentController extends GetxController {
     if (response.statusCode == 200) {
       _customerPaymentDetails
           .addAll(PaymentResponse.fromJson(response.body).data.payments);
+                print(customerPaymentDetails.length);
+
       _currentPage = PaymentResponse.fromJson(response.body).data.currentPage;
       _totalElements =
           PaymentResponse.fromJson(response.body).data.totalElements;

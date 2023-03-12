@@ -9,13 +9,12 @@ class OrderRepository extends GetxService {
   OrderRepository({required this.apiClient});
 
   Future<Response> getCustomerOrderDetails() async {
+    print(AppConstant.ordersURi());
     return await apiClient.getData(
-        AppConstant.ordersURi(),
-        apiClient.mainHeaders);
+        AppConstant.ordersURi(), apiClient.mainHeaders);
   }
 
   Future<Response> orderFoods(OrderRequest request) async {
-    return await apiClient.postData(
-        AppConstant.saveOrderURI, request.toJson());
+    return await apiClient.postData(AppConstant.saveOrderURI, request.toJson());
   }
 }

@@ -1,13 +1,14 @@
-import 'package:cloud_kitchen/controller/menu_by_restaurant_controller.dart';
 import 'package:cloud_kitchen/controller/restaurant_controller.dart';
 import 'package:cloud_kitchen/pages/restaurant/restaurant_page_body.dart';
 import 'package:cloud_kitchen/pages/search_food/search_food_page_body.dart';
 import 'package:cloud_kitchen/utils/app_constants/app_constant.dart';
 import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 
 import '../../controller/food_controller.dart';
+import '../../route_helper/route_helper.dart';
 import '../../utils/Color/colors.dart';
 import '../../widgets/big_text.dart';
 
@@ -60,9 +61,15 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
         child: Column(
           children: [
             AppBar(
-              automaticallyImplyLeading: true,
+              automaticallyImplyLeading: false,
               backgroundColor: const Color.fromARGB(255, 223, 123, 80),
               title: const Text("Search Foods"),
+              leading: BackButton(
+                onPressed: () {
+                  dispose();
+                  Get.toNamed(RouteHelper.getNavigation());
+                },
+              ),
             ),
             Container(
               margin: EdgeInsets.only(
@@ -444,6 +451,9 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
                           selection = false;
                           _searchFoods();
                         });
+                        Get.find<RestaurantController>().onClose();
+
+                        Get.find<RestaurantController>().get();
                       },
                       child: Container(
                         height: Dimensions.screenHeight / 18,
@@ -522,7 +532,6 @@ class _SearchFoodPageState extends State<SearchFoodPage> {
     AppConstant.restaurantName = restaurantDropDownValue;
     Get.find<FoodController>().onClose();
     Get.find<FoodController>().get();
-    isSearching = false;
   }
 
   void _searchRestaurants() {

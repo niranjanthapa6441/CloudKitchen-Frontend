@@ -209,6 +209,7 @@ class _SearchFoodPageBodyState extends State<SearchFoodPageBody> {
       ),
       onTap: () {
         Get.toNamed(RouteHelper.getFoodDetail(index));
+        AppConstant.toFood = false;
       },
     );
   }
@@ -407,7 +408,6 @@ class _SearchFoodPageBodyState extends State<SearchFoodPageBody> {
     AppConstant.rating = 0.0;
 
     AppConstant.sortBy = '';
-
 
     Get.find<FoodController>().onClose();
     Get.find<FoodController>().get();

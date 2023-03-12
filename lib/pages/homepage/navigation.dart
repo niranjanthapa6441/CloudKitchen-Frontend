@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controller/cart_controller.dart';
+import '../../controller/food_controller.dart';
+import '../../controller/restaurant_controller.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -28,7 +30,6 @@ class _NavigationState extends State<Navigation> {
 
   @override
   void initState() {
-    AppConstant();
     super.initState();
   }
 
@@ -87,4 +88,5 @@ class _NavigationState extends State<Navigation> {
       ),
     );
   }
+
 }

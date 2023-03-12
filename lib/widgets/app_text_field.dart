@@ -9,6 +9,7 @@ class AppTextField extends StatelessWidget {
   final IconData icon;
   bool isObscure;
   final bool readOnly;
+  final double width;
   Widget? widget;
   AppTextField(
       {Key? key,
@@ -17,7 +18,9 @@ class AppTextField extends StatelessWidget {
       required this.icon,
       this.isObscure = false,
       this.readOnly = false,
-      this.widget = null})
+      this.widget = null,
+      required this.width 
+      ,})
       : super(key: key);
 
   @override
@@ -40,7 +43,8 @@ class AppTextField extends StatelessWidget {
               : Container(
                   child: widget,
                 ),
-          Flexible(
+          Container(
+            width: width,
             child: TextFormField(
               readOnly: readOnly,
               obscureText: isObscure ? true : false,

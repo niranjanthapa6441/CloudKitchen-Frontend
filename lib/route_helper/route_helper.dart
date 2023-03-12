@@ -31,8 +31,7 @@ class RouteHelper {
   static const String availablePaymentMethods = '/availablePaymentMethods';
   static const String updateProfile = '/updateProfile';
   static const String khaltiPayment = '/khaltiPayment';
-    static const String restaurantMenuFood = '/restaurantMenu/food';
-
+  static const String restaurantMenuFood = '/restaurantMenu/food';
 
   static String getInitial() => initial;
   static String getNavigation() => navigation;
@@ -48,21 +47,25 @@ class RouteHelper {
   static String getAvailablePaymentMethods() => availablePaymentMethods;
   static String getConfirmOrder() => confirmOrder;
   static String getFoodDetail(int foodId) => '$foodDetail?foodId=$foodId';
-  static String getRestaurantMenuFoodDetail(int foodId) => '$restaurantMenuFood?foodId=$foodId';
+  static String getRestaurantMenuFoodDetail(int foodId) =>
+      '$restaurantMenuFood?foodId=$foodId';
   static String getCart() => cart;
   static String getUpdTeProfile() => updateProfile;
   static String getPayments() => payments;
   static String getKhaltiPayment() => khaltiPayment;
   static List<GetPage> routes = [
     GetPage(name: homepage, page: () => const Homepage()),
-    GetPage(name: navigation, page: () => const Navigation()),
+    GetPage(
+      name: navigation,
+      page: () => const Navigation(),
+      transition: Transition.noTransition,
+    ),
     GetPage(name: searchFoods, page: () => const SearchFoodPage()),
     GetPage(name: orders, page: () => const OrdersPage()),
     GetPage(name: viewProfile, page: () => const ProfilePage()),
     GetPage(name: payments, page: () => const PaymentDetailsPage()),
     GetPage(name: cart, page: () => const CartPage()),
     GetPage(name: restaurantMenu, page: () => const RestaurantMenu()),
-
     GetPage(
         name: orderDetail,
         page: () {

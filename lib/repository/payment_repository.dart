@@ -9,8 +9,8 @@ class PaymentRepo {
   PaymentRepo({required this.apiClient});
 
   Future<Response> getCustomerPayment() async {
+    print(AppConstant.paymentsURi());
     return await apiClient.getData(
-        AppConstant.paymentsURi(),
-        apiClient.mainHeaders);
+        AppConstant.paymentsURi(), apiClient.mainHeaders);
   }
 }

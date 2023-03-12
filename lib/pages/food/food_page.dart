@@ -1,5 +1,8 @@
 import 'package:cloud_kitchen/pages/food/food_page_body.dart';
+import 'package:cloud_kitchen/route_helper/route_helper.dart';
+import 'package:cloud_kitchen/utils/app_constants/app_constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FoodPage extends StatefulWidget {
   int foodId;
@@ -16,8 +19,21 @@ class _FoodPageState extends State<FoodPage> {
       body: Column(
         children: [
           AppBar(
-            automaticallyImplyLeading: true,
+            automaticallyImplyLeading: false,
             backgroundColor: Color.fromARGB(255, 223, 123, 80),
+            leading: AppConstant.toFood
+                ? BackButton(
+                    onPressed: () {
+                      Get.toNamed(RouteHelper.getNavigation());
+                      AppConstant.toFood = false;
+                    },
+                  )
+                : BackButton(
+                    onPressed: () {
+                      Get.toNamed(RouteHelper.getSearchFoods());
+                      AppConstant.toFood = false;
+                    },
+                  ),
           ),
           FoodPageBody(foodId: widget.foodId)
         ],

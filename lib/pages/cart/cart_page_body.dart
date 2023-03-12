@@ -1,8 +1,12 @@
 import 'package:cloud_kitchen/controller/cart_controller.dart';
+import 'package:cloud_kitchen/controller/order_controller.dart';
+import 'package:cloud_kitchen/controller/payment_controller.dart';
 import 'package:cloud_kitchen/model/cart.dart';
+import 'package:cloud_kitchen/route_helper/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Request/order_body.dart';
 import '../../utils/Color/colors.dart';
 import '../../utils/app_constants/app_constant.dart';
 import '../../utils/dimensions/dimension.dart';
@@ -31,7 +35,7 @@ class _CartPageBodyState extends State<CartPageBody> {
             child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,
-                itemCount: cartItems.cartItems?.length,
+                itemCount: cartItems.cartItems.length,
                 itemBuilder: (context, index) {
                   return _buildPageItem(index, cartItems.cartItems[index]);
                 }),
@@ -158,7 +162,10 @@ class _CartPageBodyState extends State<CartPageBody> {
         ),
         GestureDetector(
           onTap: () {
-            //Get.toNamed(RouteHelper.availablePaymentMethods);
+            if (Get.find<CartController>().cartItems.length > 0) {
+              _makeOrder();
+              Get.toNamed(RouteHelper.getNavigation());
+            }
           },
           child: Container(
             margin: EdgeInsets.only(
@@ -331,5 +338,42 @@ class _CartPageBodyState extends State<CartPageBody> {
       price += item.price;
     }
     return price;
+  }
+
+  void _makeOrder() {
+    List<CartItem> cartItems = Get.find<CartController>().cartItems;
+
+    String username = AppConstant.username;
+
+    List<OrderFoodRequest> foods = [];
+
+    int totalItems = 0;
+
+    String paymentPartner = '';
+
+    String paymentMethod = 'OFFLINE';
+
+    String paymentStatus = '';
+
+    for (var item in cartItems) {
+      totalItems += item.quantity;
+      OrderFoodRequest request = OrderFoodRequest(
+          menuFoodId: item.food.menuFoodId!, quantity: item.quantity);
+      foods.add(request);
+    }
+    OrderRequest orderRequest = OrderRequest(
+        username: username,
+        foods: foods,
+        totalItems: totalItems,
+        totalPrice: _totalPrice(),
+        paymentPartner: paymentPartner,
+        paymentMethod: paymentMethod,
+        paymentStatus: paymentStatus);
+    var orderController = Get.find<OrderController>();
+    orderController.save(orderRequest);
+    setState(() {
+      Get.find<CartController>().onClose();
+      AppConstant.hasValue = false;
+    });
   }
 }

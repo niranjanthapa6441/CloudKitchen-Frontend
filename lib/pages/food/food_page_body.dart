@@ -30,7 +30,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     checkItemsInCart();
   }
 
-
   @override
   Widget build(BuildContext context) {
     Foods food = Get.find<FoodController>().foods[widget.foodId];
@@ -68,7 +67,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                             icon: Icon(
                               Icons.shopping_cart,
                               size: Dimensions.height30,
-                              color: Color.fromARGB(255, 248, 247, 247),
+                              color: Color.fromARGB(255, 232, 221, 22),
                             ),
                           ),
                         )
@@ -89,10 +88,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   AppConstant.hasValue
                       ? Positioned(
                           top: 0,
-                          right: 0,
+                          right: 5,
                           child: BigText(
                             text: AppConstant.numberOfItems,
-                            color: Color.fromARGB(255, 241, 7, 7),
+                            color: Color.fromARGB(255, 251, 250, 249),
                           ),
                         )
                       : Container(),

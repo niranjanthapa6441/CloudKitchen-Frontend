@@ -3,10 +3,12 @@ class AppConstant {
   static const String baseURL = "http://127.0.0.1:8080/cloudKitchen";
   static String apiVersion = "/api/v1";
 
+  static bool toFood = false;
   static bool hasValue = false;
   static String numberOfItems = "";
   static String userId = "1";
   static String orderId = "";
+  static String orderStatus = "";
   static String menuFoodId = "";
   static String category = "";
   static String meal = "";
@@ -18,6 +20,10 @@ class AppConstant {
   static String period = "";
   static String startDate = "";
   static String endDate = "";
+  static String paymentStatus = "";
+
+  static String paymentStartDate = "";
+  static String paymentEndDate = "";
   static String paymentMethod = "";
   static String paymentPartner = "";
   static String sortBy = "";
@@ -41,6 +47,7 @@ class AppConstant {
   static String profileURI = "$apiVersion/user/$userId";
   static String saveOrderURI = "$apiVersion/order";
 
+
   static String searchFoodsURi() {
     searchFoodsURI =
         "$apiVersion/menu?restaurantId=$restaurantId&foodName=$foodName&sortBy=$sortBy&page=$page&size=$size&category=$category&meal=$meal&rating=$rating&restaurantName=$restaurantName";
@@ -50,14 +57,14 @@ class AppConstant {
 
   static String ordersURi() {
     ordersURI =
-        "$apiVersion/order/customer/$userId?size=$size&page=$page&period=$period&startDate=$startDate&endDate=$endDate&sortBy=$sortBy";
+        "$apiVersion/order/customer/$userId?size=$size&page=$page&period=$period&startDate=$startDate&endDate=$endDate&sortBy=$sortBy&status=$orderStatus";
     ;
     return ordersURI;
   }
 
   static String paymentsURi() {
     paymentsURI =
-        "$apiVersion/payment?page=$page&startDate=$startDate&endDate=$endDate&username=$username&period=$period&paymentPartner=$paymentPartner&paymentMethod=$paymentMethod&size=$size";
+        "$apiVersion/payment?page=$page&startDate=$paymentStartDate&endDate=$paymentEndDate&username=$username&period=$period&paymentPartner=$paymentPartner&paymentMethod=$paymentMethod&size=$size&status=$paymentStatus";
     return paymentsURI;
   }
 

@@ -247,6 +247,7 @@ class _HomePageBodyState extends State<HomePageBody> {
       ),
       onTap: () {
         Get.toNamed(RouteHelper.getFoodDetail(index));
+        AppConstant.toFood = true;
       },
     );
   }

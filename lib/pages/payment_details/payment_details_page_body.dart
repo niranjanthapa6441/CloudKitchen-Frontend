@@ -24,16 +24,13 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
   ScrollController _scrollController = ScrollController();
   @override
   void initState() {
-    super.initState();
     _scrollController.addListener(_onScroll);
+    super.initState();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
-    Get.find<PaymentController>().onClose();
-    Get.find<PaymentController>().get();
-
     super.dispose();
   }
 
@@ -50,36 +47,6 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: Dimensions.height10 * 20,
-          width: Dimensions.width10 * 300,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 223, 123, 80),
-          ),
-          child: Container(
-            margin: EdgeInsets.only(
-                top: Dimensions.height20, left: Dimensions.width20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BigText(
-                  text: "Pending Payments",
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  height: Dimensions.height50,
-                ),
-                Center(
-                  child: BigText(
-                    text: "You have no remaining dues",
-                    color: Colors.white,
-                    size: Dimensions.font10 * 1.4,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        Container(
           margin: EdgeInsets.only(
               top: Dimensions.height10, left: Dimensions.width10),
           child: BigText(
@@ -92,7 +59,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
           return GestureDetector(
             child: payments.isLoaded
                 ? Container(
-                    height: Dimensions.height10 * 62,
+                    height: Dimensions.height10 * 55,
                     padding: EdgeInsets.only(bottom: Dimensions.height20),
                     child: ListView.builder(
                         controller: _scrollController,
@@ -107,7 +74,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
                               index == payments.customerPaymentDetails.length) {
                             return Container();
                           }
-                          return _buildCustomerBookingDetailItemPage(
+                          return _buildPayment(
                               index, payments.customerPaymentDetails[index]);
                         }),
                   )
@@ -118,7 +85,7 @@ class _PaymentDetailsPageBodyState extends State<PaymentDetailsPageBody> {
     );
   }
 
-  Widget _buildCustomerBookingDetailItemPage(int index, Payments payments) {
+  Widget _buildPayment(int index, Payments payments) {
     String orderDate = payments.paymentDate.toString();
     DateTime dateTime = DateTime.parse(orderDate);
     int year = dateTime.year;

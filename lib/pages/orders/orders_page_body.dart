@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../widgets/app_text_field.dart';
 import '../../widgets/small_text.dart';
 
 class OrdersPageBody extends StatefulWidget {
@@ -25,6 +26,8 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    Get.find<OrderController>().onClose();
+    Get.find<OrderController>().get();
   }
 
   @override
@@ -47,7 +50,7 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        /* Container(
           height: Dimensions.height10 * 20,
           width: Dimensions.width10 * 300,
           decoration: BoxDecoration(
@@ -76,7 +79,8 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
               ],
             ),
           ),
-        ),
+        ), */
+
         Container(
           margin: EdgeInsets.only(
               top: Dimensions.height10, left: Dimensions.width10),
@@ -90,7 +94,7 @@ class _OrdersPageBodyState extends State<OrdersPageBody> {
           return GestureDetector(
             child: orders.isLoaded
                 ? Container(
-                    height: Dimensions.height10 * 62,
+                    height: Dimensions.height10 * 55,
                     padding: EdgeInsets.only(bottom: Dimensions.height20),
                     child: ListView.builder(
                         controller: _scrollController,

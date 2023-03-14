@@ -4,13 +4,14 @@ import 'package:cloud_kitchen/pages/menu_by_restaurant/menu_by_restaurant_page.d
 import 'package:cloud_kitchen/pages/order/order_page.dart';
 import 'package:cloud_kitchen/pages/orders/orders_page.dart';
 import 'package:cloud_kitchen/pages/payment_details/payment_details_page.dart';
+import 'package:cloud_kitchen/pages/profilepage/main_profile_page.dart';
+import 'package:cloud_kitchen/pages/profilepage/updateProfilePage.dart';
 import 'package:cloud_kitchen/pages/restauraunt_menu_food/restaurant_menu_food_page.dart';
 import 'package:cloud_kitchen/pages/search_food/search_food_page.dart';
 import 'package:get/get.dart';
 
 import '../pages/homepage/homepage.dart';
 import '../pages/homepage/navigation.dart';
-import '../pages/profile/profile_page.dart';
 
 class RouteHelper {
   static const String initial = '/';
@@ -50,7 +51,7 @@ class RouteHelper {
   static String getRestaurantMenuFoodDetail(int foodId) =>
       '$restaurantMenuFood?foodId=$foodId';
   static String getCart() => cart;
-  static String getUpdTeProfile() => updateProfile;
+  static String getUpdaTeProfile() => updateProfile;
   static String getPayments() => payments;
   static String getKhaltiPayment() => khaltiPayment;
   static List<GetPage> routes = [
@@ -63,6 +64,8 @@ class RouteHelper {
     GetPage(name: searchFoods, page: () => const SearchFoodPage()),
     GetPage(name: orders, page: () => const OrdersPage()),
     GetPage(name: viewProfile, page: () => const ProfilePage()),
+    GetPage(name: updateProfile, page: () => const UpdateProfilePage()),
+
     GetPage(name: payments, page: () => const PaymentDetailsPage()),
     GetPage(name: cart, page: () => const CartPage()),
     GetPage(name: restaurantMenu, page: () => const RestaurantMenu()),
@@ -89,6 +92,6 @@ class RouteHelper {
           return RestaurantMenuFoodPage(
             foodId: int.parse(foodId!),
           );
-        }),
+    }),
   ];
 }

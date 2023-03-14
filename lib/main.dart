@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:cloud_kitchen/utils/helper/dependencies.dart' as dep;
 import 'package:cloud_kitchen/route_helper/route_helper.dart';
 
+import 'controller/customer_controller.dart';
 import 'controller/food_controller.dart';
 import 'controller/order_controller.dart';
 import 'controller/payment_controller.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
     Get.find<OrderController>().get();
     Get.find<PaymentController>().get();
     Get.find<MenuByRestaurantController>().get();
+    Get.find<CustomerDetailController>().getCustomerDetails();
 
     return GetMaterialApp(
       title: 'Cloud Kitchen',

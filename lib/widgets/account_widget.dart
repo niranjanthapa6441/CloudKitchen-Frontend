@@ -3,7 +3,6 @@ import 'package:cloud_kitchen/widgets/app_icon.dart';
 import 'package:cloud_kitchen/widgets/big_text.dart';
 import 'package:flutter/material.dart';
 
-
 class AccountWidget extends StatelessWidget {
   AppIcon appIcon;
   BigText bigText;

@@ -5,6 +5,9 @@ class AppConstant {
 
   static bool toFood = false;
   static bool hasValue = false;
+  static bool toCart = false;
+
+  static int foodId = 0;
   static String numberOfItems = "";
   static String userId = "1";
   static String orderId = "";
@@ -46,7 +49,6 @@ class AppConstant {
   static String stripePaymentURI = "$apiVersion/payment/stripe";
   static String profileURI = "$apiVersion/user/$userId";
   static String saveOrderURI = "$apiVersion/order";
-
 
   static String searchFoodsURi() {
     searchFoodsURI =

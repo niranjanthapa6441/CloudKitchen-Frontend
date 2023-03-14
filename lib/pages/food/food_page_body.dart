@@ -62,6 +62,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           right: 0,
                           child: IconButton(
                             onPressed: () {
+                              AppConstant.toCart = true;
+                              AppConstant.foodId = widget.foodId;
                               Get.toNamed(RouteHelper.getCart());
                             },
                             icon: Icon(
@@ -76,7 +78,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           right: 0,
                           child: IconButton(
                             onPressed: () {
+                              AppConstant.toCart = true;
+                              AppConstant.foodId = widget.foodId;
                               Get.toNamed(RouteHelper.getCart());
+                              AppConstant.foodId = widget.foodId;
                             },
                             icon: Icon(
                               Icons.shopping_cart,

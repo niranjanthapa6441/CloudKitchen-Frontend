@@ -2,7 +2,11 @@ import 'package:cloud_kitchen/pages/cart/cart_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
+
+import '../../route_helper/route_helper.dart';
+import '../../utils/app_constants/app_constant.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -18,9 +22,22 @@ class _CartPageState extends State<CartPage> {
       body: Column(
         children: [
           AppBar(
-            automaticallyImplyLeading: true,
+            automaticallyImplyLeading: false,
             title: const Text('Cart'),
             backgroundColor: Color.fromARGB(255, 223, 123, 80),
+            leading: !AppConstant.toCart
+                ? BackButton(
+                    onPressed: () {
+                      Get.toNamed(RouteHelper.getNavigation());
+                      AppConstant.toCart = false;
+                    },
+                  )
+                : BackButton(
+                    onPressed: () {
+                      Get.toNamed(RouteHelper.getFoodDetail(AppConstant.foodId));
+                      AppConstant.toCart = false;
+                    },
+                  ),
           ),
           Container(
               child: Expanded(

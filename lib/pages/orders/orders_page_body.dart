@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../widgets/app_text_field.dart';
 import '../../widgets/small_text.dart';
 
 class OrdersPageBody extends StatefulWidget {

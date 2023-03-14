@@ -6,6 +6,8 @@ import 'package:cloud_kitchen/widgets/big_text.dart';
 import 'package:cloud_kitchen/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../utils/app_constants/app_constant.dart';
 
@@ -20,6 +22,76 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
+    _getCurrentLocation();
+  }
+
+  String _locationMessage = '';
+
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    Position position;
+
+    // Check if location services are enabled
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      setState(() {
+        _locationMessage = 'Location services are disabled.';
+      });
+      return;
+    }
+
+    // Check if we have permission to access the device's location
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      // Permission has not been granted, request permission
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.deniedForever) {
+        // Permission has been permanently denied, show an error message
+        setState(() {
+          _locationMessage =
+              'Location permissions have been permanently denied.';
+        });
+        return;
+      } else if (permission == LocationPermission.denied) {
+        // Permission has been denied, show a dialog box to ask for permission again
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: Text('Location permissions'),
+            content: Text('This app needs access to your location.'),
+            actions: [
+              TextButton(
+                child: Text('Cancel'),
+                onPressed: () => Navigator.pop(context),
+              ),
+              TextButton(
+                child: Text('Grant permission'),
+                onPressed: () => {
+                  Navigator.pop(context),
+                  _getCurrentLocation(),
+                },
+              ),
+            ],
+          ),
+        );
+        return;
+      }
+    }
+
+    // Get the current location
+    position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    // Get the address from the current position
+    final List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    final Placemark place = placemarks.first;
+
+    // Update the UI with the current address
+    setState(() {
+      _locationMessage = "${place.street}, ${place.locality}, ${place.country}";
+    });
   }
 
   @override
@@ -46,8 +118,7 @@ class _HomepageState extends State<Homepage> {
                     ),
                     Container(
                       child: BigText(
-                        text:
-                            '2, PuranoNaikap, Kathmandu, BagmatiProvince, Nepal',
+                        text: _locationMessage,
                         textOverflow: TextOverflow.ellipsis,
                         size: Dimensions.font15,
                         color: Color.fromARGB(255, 137, 136, 136),
@@ -65,6 +136,7 @@ class _HomepageState extends State<Homepage> {
                             child: IconButton(
                               onPressed: () {
                                 Get.toNamed(RouteHelper.getCart());
+                                AppConstant.toCart = false;
                               },
                               icon: Icon(
                                 Icons.shopping_cart,
@@ -77,6 +149,7 @@ class _HomepageState extends State<Homepage> {
                             child: IconButton(
                               onPressed: () {
                                 Get.toNamed(RouteHelper.getCart());
+                                AppConstant.toCart = false;
                               },
                               icon: Icon(
                                 Icons.shopping_cart,

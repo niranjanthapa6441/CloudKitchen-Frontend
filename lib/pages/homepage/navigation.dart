@@ -1,16 +1,12 @@
 import 'package:cloud_kitchen/pages/homepage/homepage.dart';
 import 'package:cloud_kitchen/pages/orders/orders_page.dart';
 import 'package:cloud_kitchen/pages/payment_details/payment_details_page.dart';
-import 'package:cloud_kitchen/pages/profile/profile_page.dart';
-import 'package:cloud_kitchen/pages/search_food/search_food_page.dart';
-import 'package:cloud_kitchen/utils/app_constants/app_constant.dart';
+
+
 import 'package:cloud_kitchen/utils/dimensions/dimension.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../controller/cart_controller.dart';
-import '../../controller/food_controller.dart';
-import '../../controller/restaurant_controller.dart';
+import '../profilepage/main_profile_page.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -88,5 +84,4 @@ class _NavigationState extends State<Navigation> {
       ),
     );
   }
-
 }

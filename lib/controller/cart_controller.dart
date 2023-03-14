@@ -2,6 +2,7 @@ import 'package:cloud_kitchen/model/cart.dart';
 import 'package:get/get.dart';
 
 import '../Response/foods.dart';
+import '../utils/app_constants/app_constant.dart';
 
 class CartController extends GetxController implements GetxService {
   final List<CartItem> _cartItems = [];
@@ -42,16 +43,17 @@ class CartController extends GetxController implements GetxService {
   }
 
   void remove(Foods food, int quantity, double price) {
-    if (cartItems.length < 2) {
-      hasValue = false;
-    }
     for (var item in cartItems) {
       if (item.food.menuFoodId == food.menuFoodId) {
         cartItems.remove(item);
+        if (cartItems.isEmpty) {
+          AppConstant.hasValue = false;
+        }
         return;
       }
     }
   }
+
   @override
   void onClose() {
     clear();
